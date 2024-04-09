@@ -28,6 +28,15 @@ public class Income extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
+        catogoriesComboBox = new javax.swing.JComboBox<>();
+        catogoryLabel = new javax.swing.JLabel();
+        amountLabel = new javax.swing.JLabel();
+        amountTextField = new javax.swing.JTextField();
+        doneButton = new javax.swing.JButton();
+        newButton = new javax.swing.JButton();
+        newCatogoryLabel = new javax.swing.JLabel();
+        newCatogoryTextField = new javax.swing.JTextField();
+        addButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Income");
@@ -35,32 +44,160 @@ public class Income extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("Income");
 
+        catogoriesComboBox.setSelectedIndex(-1);
+        catogoriesComboBox.setToolTipText("");
+        catogoriesComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                catogoriesComboBoxActionPerformed(evt);
+            }
+        });
+
+        catogoryLabel.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        catogoryLabel.setText("Catogory :");
+
+        amountLabel.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        amountLabel.setText("Amount :");
+
+        doneButton.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        doneButton.setText("Done");
+
+        newButton.setText("New");
+        newButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newButtonActionPerformed(evt);
+            }
+        });
+
+        newCatogoryLabel.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        newCatogoryLabel.setText("New Catogory :");
+
+        newCatogoryTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newCatogoryTextFieldActionPerformed(evt);
+            }
+        });
+
+        addButton.setText("Add");
+        addButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(43, 43, 43)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(catogoryLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(39, 39, 39)
+                        .addComponent(catogoriesComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(amountLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(39, 39, 39)
+                        .addComponent(amountTextField))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(newCatogoryLabel)
+                        .addGap(27, 27, 27)
+                        .addComponent(newCatogoryTextField)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(newButton)
+                    .addComponent(addButton))
+                .addGap(43, 43, 43))
             .addGroup(layout.createSequentialGroup()
-                .addGap(155, 155, 155)
-                .addComponent(jLabel1)
-                .addContainerGap(182, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(168, 168, 168)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(153, 153, 153)
+                        .addComponent(doneButton, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(jLabel1)
-                .addContainerGap(254, Short.MAX_VALUE))
+                .addGap(40, 40, 40)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(catogoriesComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(catogoryLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(newButton, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(amountTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(amountLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(newCatogoryTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(newCatogoryLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(35, 35, 35)
+                .addComponent(doneButton)
+                .addGap(33, 33, 33))
         );
+
+        newCatogoryLabel.setVisible(false);
+        newCatogoryTextField.setVisible(false);
+        addButton.setVisible(false);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void catogoriesComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_catogoriesComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_catogoriesComboBoxActionPerformed
+
+    private void newButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newButtonActionPerformed
+        // TODO add your handling code here:
+        // Toggle visibility of new category fields
+        boolean isVisible = !newCatogoryLabel.isVisible();
+        newCatogoryLabel.setVisible(isVisible);
+        newCatogoryTextField.setVisible(isVisible);
+        addButton.setVisible(isVisible);
+    }//GEN-LAST:event_newButtonActionPerformed
+
+    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
+        // TODO add your handling code here:
+        // Get the text from new category text field
+        String newCategory = newCatogoryTextField.getText().trim();
+
+        // Check if the new category is not empty
+        if (!newCategory.isEmpty()) {
+            // Add the new category to the combo box
+            catogoriesComboBox.addItem(newCategory);
+
+            // Optionally, you can select the newly added category
+            catogoriesComboBox.setSelectedItem(newCategory);
+
+            // Clear the text field for next entry
+            newCatogoryTextField.setText("");
+        }
+    }//GEN-LAST:event_addButtonActionPerformed
+
+    private void newCatogoryTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newCatogoryTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_newCatogoryTextFieldActionPerformed
+
     /**
      * @param args the command line arguments
      */
-   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addButton;
+    private javax.swing.JLabel amountLabel;
+    private javax.swing.JTextField amountTextField;
+    private javax.swing.JComboBox<String> catogoriesComboBox;
+    private javax.swing.JLabel catogoryLabel;
+    private javax.swing.JButton doneButton;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton newButton;
+    private javax.swing.JLabel newCatogoryLabel;
+    private javax.swing.JTextField newCatogoryTextField;
     // End of variables declaration//GEN-END:variables
 }
