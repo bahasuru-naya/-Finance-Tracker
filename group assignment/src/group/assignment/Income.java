@@ -33,7 +33,7 @@ public class Income extends javax.swing.JFrame {
         setTitle("Income Management");
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setText("Income");
+        jLabel1.setText("Income Management");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
