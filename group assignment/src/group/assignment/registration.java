@@ -16,6 +16,7 @@ import java.sql.SQLException;
 public class registration extends javax.swing.JFrame {
 
     DBconnection d1 = new DBconnection();
+    Encryption en = new Encryption();
     
     public registration() {
         initComponents();
@@ -136,6 +137,7 @@ public class registration extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String password = new String(jPasswordField1.getPassword());
         String cpassword = new String(jPasswordField2.getPassword());
+        String passworde = null;
         if(jTextField1.getText().equals(""))
         {
             jOptionPane1.showMessageDialog(jPanel1, "Enter name...");
@@ -156,7 +158,14 @@ public class registration extends javax.swing.JFrame {
        
         else{
             try {
-            
+                
+                try {
+                    passworde =en.encrypt(password);
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
+
             
             PreparedStatement statement = d1.getCon().prepareStatement("INSERT INTO user_table (user_name, email, passwd) VALUES (?, ?, ?)");
         
@@ -164,7 +173,7 @@ public class registration extends javax.swing.JFrame {
             // For example:
             statement.setString(1, jTextField1.getText());
             statement.setString(2, jTextField2.getText());
-            statement.setString(3, password);
+            statement.setString(3, passworde);
             
             
 
