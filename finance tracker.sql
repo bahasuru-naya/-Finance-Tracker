@@ -12,3 +12,13 @@ passwd char(50) NOT NULL
 USE finance_tracker ;
 select *
 from user_table;
+
+CREATE TABLE incomes(
+income_id int NOT Null AUTO_INCREMENT PRIMARY KEY,
+user_name char(50) NOT NULL ,
+amount FLOAT(15,2) NOT NULL check (amount>0),
+category char(50) NOT NULL,
+`date`  Date,
+constraint fk1 foreign key (user_name) references user_table(user_name)
+
+);
