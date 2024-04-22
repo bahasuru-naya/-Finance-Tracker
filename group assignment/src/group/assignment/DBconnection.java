@@ -14,6 +14,10 @@ import java.sql.SQLException;
  * @author LENOVO
  */
 public class DBconnection {
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
     private static final  String JDBC_URL = "jdbc:mysql://localhost:3306/finance_tracker?zeroDateTimeBehavior=CONVERT_TO_NULL";
     private static final String USERNAME = "root";
     private static final String PASSWORD = "bahasurubn0008";
