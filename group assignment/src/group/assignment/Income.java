@@ -6,7 +6,6 @@ package group.assignment;
 
 import static group.assignment.DBconnection.getCon;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -27,6 +26,7 @@ public class Income extends javax.swing.JFrame {
     public Income() {
         initComponents();
         setLocationRelativeTo(null);
+        loadCategories(); // Load categories from the database
     }
 
     private tracker trackerRef;
@@ -35,19 +35,20 @@ public class Income extends javax.swing.JFrame {
     public Income(tracker trackerRef, String username) {
         initComponents();
         setLocationRelativeTo(null);
-        loadDataFromDatabase();
+       // loadDataFromDatabase();
+        loadCategories(); // Load categories from the database
         this.trackerRef = trackerRef;
         this.username = username; // Assign username passed from tracker class
     }
 
-    public void loadDataFromDatabase() {
+   /* public void loadDataFromDatabase() {
         try {
 
             Connection con = DBconnection.getCon();
             System.out.println("sucessful");
 
             Statement statement = con.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT income_id,amount,category,date FROM incomes");
+            ResultSet resultSet = statement.executeQuery("SELECT income_id,amount,category,date,notes FROM incomes");
 
             // Get metadata for column names
             ResultSetMetaData metaData = resultSet.getMetaData();
@@ -77,20 +78,60 @@ public class Income extends javax.swing.JFrame {
             System.out.println(ex);
 
         }
+
+    }
+*/
+    public void loadCategories() {
+
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            conn = getCon();
+            String query = "SELECT DISTINCT category FROM incomes WHERE user_name = ?";
+            pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, username); // Use the username variable to filter categories
+            rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                String category = rs.getString("category");
+                catogoriesComboBox.addItem(category); // Add category to the combo box
+                System.out.println("Done adding");
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error loading categories: " + ex.getMessage());
+        } finally {
+            // Close resources
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+                System.out.println("Error closing resources: " + ex.getMessage());
+            }
+        }
     }
 
-    public static void insertIncome(String userName, double amount, String category, java.util.Date date) {
+    public static void insertIncome(String userName, double amount, String category, java.sql.Date date, String notes) {
         Connection conn = null;
         PreparedStatement pstmt = null;
 
         try {
             conn = getCon();
-            String query = "INSERT INTO incomes (user_name, amount, category, date) VALUES (?, ?, ?, ?)";
+            String query = "INSERT INTO incomes (user_name, amount, category, date, notes) VALUES (?, ?, ?, ?, ?)";
             pstmt = conn.prepareStatement(query);
             pstmt.setString(1, userName);
             pstmt.setDouble(2, amount);
             pstmt.setString(3, category);
-            pstmt.setDate(4, new java.sql.Date(date.getTime()));
+            pstmt.setDate(4, date);
+            pstmt.setString(5, notes); // Set notes parameter
             pstmt.executeUpdate();
             System.out.println("Income added successfully");
         } catch (SQLException ex) {
@@ -130,8 +171,9 @@ public class Income extends javax.swing.JFrame {
         monthComboBox = new javax.swing.JComboBox<>();
         dateComboBox = new javax.swing.JComboBox<>();
         yearTextField = new javax.swing.JTextField();
-        newCatogoryLabel1 = new javax.swing.JLabel();
-        yearTextField1 = new javax.swing.JTextField();
+        notesLabel = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        notesTextArea = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Income");
@@ -234,14 +276,12 @@ public class Income extends javax.swing.JFrame {
             }
         });
 
-        newCatogoryLabel1.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        newCatogoryLabel1.setText("New Catogory :");
+        notesLabel.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        notesLabel.setText("Notes :");
 
-        yearTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                yearTextField1ActionPerformed(evt);
-            }
-        });
+        notesTextArea.setColumns(20);
+        notesTextArea.setRows(5);
+        jScrollPane2.setViewportView(notesTextArea);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -249,40 +289,23 @@ public class Income extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(16, 16, 16)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(81, 81, 81))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(newCatogoryLabel)
-                                .addGap(27, 27, 27)
-                                .addComponent(newCatogoryTextField)
-                                .addGap(18, 18, 18)
-                                .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(doneButton, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)))
+                        .addComponent(newCatogoryLabel)
+                        .addGap(27, 27, 27)
+                        .addComponent(newCatogoryTextField)
+                        .addGap(18, 18, 18)
+                        .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(doneButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(dateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(24, 24, 24)
-                        .addComponent(yearTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE)
-                        .addGap(19, 19, 19)
-                        .addComponent(monthComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(19, 19, 19)
-                        .addComponent(dateComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(newCatogoryLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(yearTextField1))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(amountLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -293,7 +316,26 @@ public class Income extends javax.swing.JFrame {
                                 .addComponent(catogoriesComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(18, 18, 18)
                                 .addComponent(newButton))
-                            .addComponent(amountTextField))))
+                            .addComponent(amountTextField)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(dateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(notesLabel))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(24, 24, 24)
+                                .addComponent(yearTextField)
+                                .addGap(19, 19, 19)
+                                .addComponent(monthComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(19, 19, 19)
+                                .addComponent(dateComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(24, 24, 24)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(69, 69, 69)
+                        .addComponent(jLabel1)
+                        .addGap(75, 75, 75)))
                 .addGap(482, 482, 482))
         );
         layout.setVerticalGroup(
@@ -318,14 +360,14 @@ public class Income extends javax.swing.JFrame {
                             .addComponent(dateLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(monthComboBox)
                             .addComponent(dateComboBox)
-                            .addComponent(yearTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE))
+                            .addComponent(yearTextField))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(newCatogoryLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(notesLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(71, 71, 71))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(yearTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(newCatogoryTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -335,7 +377,7 @@ public class Income extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(doneButton)
                             .addComponent(deleteButton))))
-                .addContainerGap())
+                .addGap(18, 18, 18))
         );
 
         newCatogoryLabel.setVisible(false);
@@ -344,7 +386,6 @@ public class Income extends javax.swing.JFrame {
         dateComboBox.getAccessibleContext().setAccessibleName("");
         newCatogoryTextField.setVisible(false);
         newCatogoryLabel.setVisible(false);
-        newCatogoryTextField.setVisible(false);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -397,11 +438,19 @@ public class Income extends javax.swing.JFrame {
                 // Get the selected category from the combo box
                 String category = (String) catogoriesComboBox.getSelectedItem();
 
-                // Get the current date
-                java.util.Date date = new java.util.Date();
+                // Get the manually entered date
+                String year = yearTextField.getText();
+                String month = (String) monthComboBox.getSelectedItem();
+                String date = (String) dateComboBox.getSelectedItem();
+
+                // Concatenate year, month, and date to form the date string
+                String dateString = year + "-" + month + "-" + date;
+
+                // Get the notes from the text area
+                String notes = notesTextArea.getText().trim();
 
                 // Insert income into the database
-                insertIncome(trackerRef.username, amount, category, date);
+                insertIncome(trackerRef.username, amount, category, java.sql.Date.valueOf(dateString), notes);
 
                 // Update balance in tracker GUI
                 trackerRef.updateBalance();
@@ -440,7 +489,7 @@ public class Income extends javax.swing.JFrame {
                 int rowsAffected = pstmt.executeUpdate();
                 if (rowsAffected > 0) {
                     // If deletion is successful, reload the data in the table
-                    loadDataFromDatabase();
+//                    loadDataFromDatabase();
                     JOptionPane.showMessageDialog(this, "Record deleted successfully.", "Delete Successful", JOptionPane.INFORMATION_MESSAGE);
                 } else {
                     JOptionPane.showMessageDialog(this, "Failed to delete record.", "Delete Failed", JOptionPane.ERROR_MESSAGE);
@@ -466,10 +515,6 @@ public class Income extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_yearTextFieldActionPerformed
 
-    private void yearTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yearTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_yearTextField1ActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -486,13 +531,14 @@ public class Income extends javax.swing.JFrame {
     private javax.swing.JButton doneButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JComboBox<String> monthComboBox;
     private javax.swing.JButton newButton;
     private javax.swing.JLabel newCatogoryLabel;
-    private javax.swing.JLabel newCatogoryLabel1;
     private javax.swing.JTextField newCatogoryTextField;
+    private javax.swing.JLabel notesLabel;
+    private javax.swing.JTextArea notesTextArea;
     private javax.swing.JTextField yearTextField;
-    private javax.swing.JTextField yearTextField1;
     // End of variables declaration//GEN-END:variables
 }
