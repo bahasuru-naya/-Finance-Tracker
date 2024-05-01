@@ -295,81 +295,11 @@ public class Expenses extends javax.swing.JFrame {
 
     private void doneButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doneButtonActionPerformed
         // TODO add your handling code here:
-        // Get the text from amount text field
-        String amountText = amountTextField.getText().trim();
-
-        // Check if the amount is a valid number
-        try {
-            double amount = Double.parseDouble(amountText);
-            if (amount <= 0) {
-                // Display error message if amount is not positive
-                JOptionPane.showMessageDialog(this, "Please enter a valid positive amount.", "Invalid Amount", JOptionPane.ERROR_MESSAGE);
-            } else {
-                // Get the selected category from the combo box
-                String category = (String) catogoriesComboBox.getSelectedItem();
-
-                // Get the manually entered date
-                String year = yearTextField.getText();
-                String month = (String) monthComboBox.getSelectedItem();
-                String date = (String) dateComboBox.getSelectedItem();
-
-                // Concatenate year, month, and date to form the date string
-                String dateString = year + "-" + month + "-" + date;
-
-                // Get the notes from the text area
-                String notes = notesTextArea.getText().trim();
-
-                // Insert income into the database
-                insertIncome(trackerRef.username, amount, category, java.sql.Date.valueOf(dateString), notes);
-
-                // Update balance in tracker GUI
-                trackerRef.updateBalance();
-
-                dispose(); // Close the Income window
-            }
-        } catch (NumberFormatException e) {
-            // Display error message if amount is not a number
-            JOptionPane.showMessageDialog(this, "Please enter a valid numeric amount.", "Invalid Amount", JOptionPane.ERROR_MESSAGE);
-        }
-
     }//GEN-LAST:event_doneButtonActionPerformed
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         // TODO add your handling code here:
-        int selectedRow = jTable1.getSelectedRow();
-        if (selectedRow == -1) {
-            // If no row is selected, display an alert message
-            JOptionPane.showMessageDialog(this, "Please select a record to delete.", "No Record Selected", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-
-        // Get the value of the first column (income_id) of the selected row
-        int incomeId = (int) jTable1.getValueAt(selectedRow, 0);
-
-        // Confirm with the user before deleting
-        int option = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete this record?", "Confirm Delete", JOptionPane.YES_NO_OPTION);
-        if (option == JOptionPane.YES_OPTION) {
-            // If user confirms deletion, proceed to delete the record from the database
-            try {
-                Connection con = DBconnection.getCon();
-                String query = "DELETE FROM incomes WHERE income_id = ?";
-                PreparedStatement pstmt = con.prepareStatement(query);
-                pstmt.setInt(1, incomeId);
-                int rowsAffected = pstmt.executeUpdate();
-                if (rowsAffected > 0) {
-                    // If deletion is successful, reload the data in the table
-                    //                    loadDataFromDatabase();
-                    JOptionPane.showMessageDialog(this, "Record deleted successfully.", "Delete Successful", JOptionPane.INFORMATION_MESSAGE);
-                } else {
-                    JOptionPane.showMessageDialog(this, "Failed to delete record.", "Delete Failed", JOptionPane.ERROR_MESSAGE);
-                }
-                pstmt.close();
-                con.close();
-            } catch (SQLException ex) {
-                System.out.println(ex);
-                JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage(), "Delete Failed", JOptionPane.ERROR_MESSAGE);
-            }
-        }
+        
     }//GEN-LAST:event_deleteButtonActionPerformed
 
     private void newButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newButtonActionPerformed
