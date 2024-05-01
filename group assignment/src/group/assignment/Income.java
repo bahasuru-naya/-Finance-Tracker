@@ -20,6 +20,7 @@ public class Income extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         loadCategories(); // Load categories from the database
         setNewCategoryVisibility(false); // Initially hide new category adding items
+        loadDataFromDatabase(); // Load data into the table from the database
     }
 
     public Income(tracker trackerRef, String username) {
@@ -29,6 +30,7 @@ public class Income extends javax.swing.JFrame {
         this.username = username; // Assign username passed from tracker class
         loadCategories(); // Load categories from the database
         setNewCategoryVisibility(false); // Initially hide new category adding items
+        loadDataFromDatabase(); // Load data into the table from the database
     }
 
     @SuppressWarnings("unchecked")
@@ -105,9 +107,7 @@ public class Income extends javax.swing.JFrame {
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(notesLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0))
+            .addComponent(notesLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
         );
 
@@ -407,6 +407,32 @@ public class Income extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void loadDataFromDatabase() {
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0); // Clear existing rows from the table
+        try {
+            Connection con = DBconnection.getCon();
+            String query = "SELECT * FROM incomes WHERE user_name = ?";
+            PreparedStatement pst = con.prepareStatement(query);
+            pst.setString(1, username); // Assuming you have the username stored in a variable
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("income_id");
+                float amount = rs.getFloat("amount");
+                String category = rs.getString("category");
+                String date = rs.getString("date");
+                String notes = rs.getString("notes");
+                // Add data to the table
+                model.addRow(new Object[]{id, amount, category, date, notes});
+            }
+            rs.close();
+            pst.close();
+            con.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Error loading data from the database: " + ex.getMessage());
+        }
+    }
+
     private void catogoriesComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_catogoriesComboBoxActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_catogoriesComboBoxActionPerformed
@@ -467,8 +493,9 @@ public class Income extends javax.swing.JFrame {
             pst.setString(5, notes);
             pst.executeUpdate();
             JOptionPane.showMessageDialog(this, "Income added successfully.");
-            // Refresh the table
-            // loadDataFromDatabase();
+            loadDataFromDatabase(); // Refresh the table
+            trackerRef.updateBalance();
+
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, "Error adding income: " + ex.getMessage());
         }
@@ -485,13 +512,14 @@ public class Income extends javax.swing.JFrame {
         if (confirm == JOptionPane.YES_OPTION) {
             try {
                 Connection con = getCon();
-                String query = "DELETE FROM Income WHERE incomeID = ?";
+                String query = "DELETE FROM incomes WHERE income_id = ?";
                 PreparedStatement pst = con.prepareStatement(query);
                 pst.setInt(1, incomeID);
                 pst.executeUpdate();
                 JOptionPane.showMessageDialog(this, "Income entry deleted successfully.");
-                // Refresh the table
-                // loadDataFromDatabase();
+                // Update the table
+                loadDataFromDatabase();
+                trackerRef.updateBalance();
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(this, "Error deleting income: " + ex.getMessage());
             }
