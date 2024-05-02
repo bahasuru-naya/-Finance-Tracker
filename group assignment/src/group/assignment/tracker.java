@@ -152,6 +152,8 @@ public class tracker extends javax.swing.JFrame {
             public void run() {
                 Income incomeGUI = new Income(tracker.this, username);
                 incomeGUI.setVisible(true);
+                //incomeGUI.setSize(1120,650);
+                incomeGUI.setResizable(false);
             }
         });
     }//GEN-LAST:event_jButton1ActionPerformed
