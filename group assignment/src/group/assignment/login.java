@@ -15,8 +15,6 @@ public class login extends javax.swing.JFrame {
     registration r1 = new registration();
     tracker t1 = new tracker();
     DBconnection d1 = new DBconnection();
-    Encryption en = new Encryption();
-    String passworddbe;
     
     
     public login() {
@@ -192,14 +190,9 @@ public class login extends javax.swing.JFrame {
             if (resultSet.next()) {
             // If a row is found, retrieve the password
             String passworddb = resultSet.getString("passwd");
-                try {
-                passworddbe= en.decrypt(passworddb);
-                } catch (Exception e) {
-                e.printStackTrace();
-                }
             // Do whatever you need to do with the password, for example, print it
             System.out.println("Password for username " + jTextField1.getText() + ": " + passworddb);
-                if(passworddbe.equals(password))
+                if(passworddb.equals(password))
                 {
                     t= true; 
                     t1.setUsername(jTextField1.getText());
