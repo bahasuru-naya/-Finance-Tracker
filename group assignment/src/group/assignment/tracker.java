@@ -4,32 +4,30 @@
  */
 package group.assignment;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 /**
  *
  * @author LENOVO
  */
 public class tracker extends javax.swing.JFrame {
 
-    String username = "";
+    
+
+    private String username ="";
     Income i = new Income();
     Reports r = new Reports();
-    Expenses ex = new Expenses();
-
+    Expenses ex = new Expenses(); 
+    
     public tracker() {
         initComponents();
-        setLocationRelativeTo(null);
-
+        setLocationRelativeTo(null);        
+        jLabel5.setText("Hi "+this.username);
+        
     }
-
+    
     public void setUsername(String username) {
         this.username = username;
-        jLabel5.setText("Hi " + this.username + "!");
-        updateBalance();
+        jLabel5.setText("Hi "+this.username);
+        
     }
 
     /**
@@ -71,7 +69,7 @@ public class tracker extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel3.setText("Balance");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 130, 70, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 130, 66, -1));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel4.setText("WELCOME TO FINANCE TRACKER");
@@ -79,7 +77,7 @@ public class tracker extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel5.setText("Hi ");
+        jLabel5.setText(" Hi ");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 390, -1));
 
         jButton4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -121,7 +119,6 @@ public class tracker extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel6.setText("Rs. 0.00");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, -1, -1));
-        updateBalance();
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel7.setText("Rs. 0.00");
@@ -150,8 +147,8 @@ public class tracker extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Income incomeGUI = new Income(tracker.this, username);
-                incomeGUI.setVisible(true);
+                
+                i.setVisible(true);
             }
         });
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -160,7 +157,7 @@ public class tracker extends javax.swing.JFrame {
         this.dispose();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-
+                
                 new login().setVisible(true);
             }
         });
@@ -169,7 +166,7 @@ public class tracker extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-
+                
                 ex.setVisible(true);
             }
         });
@@ -178,62 +175,16 @@ public class tracker extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-
+                
                 r.setVisible(true);
             }
         });
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    // Update balance label
-    public void updateBalance() {
-        // Get current user's total income from the database
-        double totalIncome = getTotalIncomeForUser(username);
-
-        // Update jLabel6 with the fetched total income
-        jLabel6.setText("Rs. " + String.format("%.2f", totalIncome));
-    }
-
-    private double getTotalIncomeForUser(String username) {
-        double totalIncome = 0.0;
-        Connection con = null;
-        PreparedStatement pstmt = null;
-        ResultSet rs = null;
-
-        try {
-            con = DBconnection.getCon(); // Get database connection
-            String query = "SELECT SUM(amount) AS total_income FROM incomes WHERE user_name = ?";
-            pstmt = con.prepareStatement(query);
-            pstmt.setString(1, username);
-            rs = pstmt.executeQuery();
-
-            if (rs.next()) {
-                totalIncome = rs.getDouble("total_income");
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        } finally {
-            // Close resources
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (pstmt != null) {
-                    pstmt.close();
-                }
-                if (con != null) {
-                    con.close();
-                }
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
-        }
-
-        return totalIncome;
-    }
-
     /**
      * @param args the command line arguments
      */
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
