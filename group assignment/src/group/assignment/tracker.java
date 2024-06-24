@@ -40,6 +40,7 @@ public class tracker extends javax.swing.JFrame {
     public tracker() {
         initComponents();
         setLocationRelativeTo(null);
+        
 
     }
 
@@ -396,6 +397,7 @@ public class tracker extends javax.swing.JFrame {
             public void run() {
                 jFrame1.setSize(400, 350);
                 jFrame1.setVisible(true);
+                jFrame1.setLocationRelativeTo(null);
              }
         });
     }//GEN-LAST:event_jMenuItem5ActionPerformed
@@ -430,11 +432,16 @@ public class tracker extends javax.swing.JFrame {
         pieDataset.setValue("Expences", Double.valueOf(totalExpenses));
         pieDataset.setValue("Balance", Double.valueOf(absBalance));
         JFreeChart pieChart = ChartFactory.createPieChart3D("Finance Overview", pieDataset, true, true, false);
-        pieChart.setTextAntiAlias(true);
-        pieChart.setAntiAlias(true);
+        pieChart.setBackgroundPaint(Color.WHITE);
+        pieChart.setBorderVisible(false);
+        pieChart.setAntiAlias(false);
+        final PiePlot3D plot = ( PiePlot3D ) pieChart.getPlot( );             
+        plot.setStartAngle( 270 );             
+        plot.setForegroundAlpha( 0.60f );                
         Rotator rotator = new Rotator((PiePlot3D) pieChart.getPlot());
         rotator.start();      
         ChartPanel piePanel = new ChartPanel(pieChart);
+       
         jPanel2.removeAll();
         jPanel2.add(piePanel, BorderLayout.CENTER);
         jPanel2.validate();
