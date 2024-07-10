@@ -15,6 +15,8 @@ public class login extends javax.swing.JFrame {
     registration r1 = new registration();
     tracker t1 = new tracker();
     DBconnection d1 = new DBconnection();
+    Encryption en = new Encryption();
+    String passworddbe;
     
     
     public login() {
@@ -47,6 +49,7 @@ public class login extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Finance Tracker");
+        setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Microsoft New Tai Lue", 1, 36)); // NOI18N
         jLabel1.setText("Finance Tracker");
@@ -190,9 +193,15 @@ public class login extends javax.swing.JFrame {
             if (resultSet.next()) {
             // If a row is found, retrieve the password
             String passworddb = resultSet.getString("passwd");
+                try {
+                passworddbe= en.decrypt(passworddb);
+                } catch (Exception e) {
+                e.printStackTrace();
+                jOptionPane1.showMessageDialog(t1, "Decryption error....");
+                }
             // Do whatever you need to do with the password, for example, print it
             System.out.println("Password for username " + jTextField1.getText() + ": " + passworddb);
-                if(passworddb.equals(password))
+                if(passworddbe.equals(password))
                 {
                     t= true; 
                     t1.setUsername(jTextField1.getText());
