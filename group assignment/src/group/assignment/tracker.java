@@ -342,8 +342,9 @@ public class tracker extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-
-                r.setVisible(true);
+                Reports r1 = new Reports(tracker.this, username);
+                r1.setVisible(true);
+                r1.setResizable(false);
             }
         });
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -351,8 +352,9 @@ public class tracker extends javax.swing.JFrame {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
          java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-
-                r.setVisible(true);
+                Reports r1 = new Reports(tracker.this, username);
+                r1.setVisible(true);
+                r1.setResizable(false);
             }
         });
     }//GEN-LAST:event_jMenuItem1ActionPerformed
