@@ -67,7 +67,7 @@ public class Income extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Income");
 
-        jPanel8.setBackground(new java.awt.Color(102, 51, 255));
+        jPanel8.setBackground(new java.awt.Color(51, 102, 255));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -84,7 +84,7 @@ public class Income extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jPanel4.setBackground(new java.awt.Color(102, 51, 255));
+        jPanel4.setBackground(new java.awt.Color(51, 102, 255));
 
         notesLabel.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         notesLabel.setForeground(new java.awt.Color(255, 255, 255));
@@ -112,9 +112,9 @@ public class Income extends javax.swing.JFrame {
 
         newCatogoryLabel.setVisible(false);
 
-        jPanel6.setBackground(new java.awt.Color(102, 51, 255));
+        jPanel6.setBackground(new java.awt.Color(51, 102, 255));
 
-        jPanel3.setBackground(new java.awt.Color(102, 51, 255));
+        jPanel3.setBackground(new java.awt.Color(51, 102, 255));
 
         amountLabel.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         amountLabel.setForeground(new java.awt.Color(255, 255, 255));
@@ -138,7 +138,7 @@ public class Income extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jPanel2.setBackground(new java.awt.Color(102, 51, 255));
+        jPanel2.setBackground(new java.awt.Color(51, 102, 255));
 
         catogoryLabel.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         catogoryLabel.setForeground(new java.awt.Color(255, 255, 255));
@@ -183,7 +183,7 @@ public class Income extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jPanel1.setBackground(new java.awt.Color(102, 51, 255));
+        jPanel1.setBackground(new java.awt.Color(51, 102, 255));
 
         newCatogoryLabel.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         newCatogoryLabel.setForeground(new java.awt.Color(255, 255, 255));
@@ -248,7 +248,7 @@ public class Income extends javax.swing.JFrame {
                 .addGap(0, 0, 0))
         );
 
-        jPanel7.setBackground(new java.awt.Color(0, 153, 153));
+        jPanel7.setBackground(new java.awt.Color(51, 102, 255));
 
         submitButton.setBackground(new java.awt.Color(0, 204, 0));
         submitButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
@@ -294,7 +294,7 @@ public class Income extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(204, 255, 255));
         jLabel1.setText("Income Management");
 
-        jPanel5.setBackground(new java.awt.Color(102, 51, 255));
+        jPanel5.setBackground(new java.awt.Color(51, 102, 255));
 
         dateLabel.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         dateLabel.setForeground(new java.awt.Color(255, 255, 255));
