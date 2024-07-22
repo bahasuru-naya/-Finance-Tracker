@@ -87,6 +87,7 @@ public class Income extends javax.swing.JFrame {
         jPanel4.setBackground(new java.awt.Color(102, 51, 255));
 
         notesLabel.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        notesLabel.setForeground(new java.awt.Color(255, 255, 255));
         notesLabel.setText("Notes :");
 
         notesTextArea.setColumns(20);
@@ -116,6 +117,7 @@ public class Income extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(102, 51, 255));
 
         amountLabel.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        amountLabel.setForeground(new java.awt.Color(255, 255, 255));
         amountLabel.setText("Amount :");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -139,6 +141,7 @@ public class Income extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(102, 51, 255));
 
         catogoryLabel.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        catogoryLabel.setForeground(new java.awt.Color(255, 255, 255));
         catogoryLabel.setText("Catogory :");
 
         catogoriesComboBox.setToolTipText("");
@@ -183,6 +186,7 @@ public class Income extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(102, 51, 255));
 
         newCatogoryLabel.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        newCatogoryLabel.setForeground(new java.awt.Color(255, 255, 255));
         newCatogoryLabel.setText("New Catogory :");
 
         addButton.setBackground(new java.awt.Color(0, 0, 255));
@@ -293,6 +297,7 @@ public class Income extends javax.swing.JFrame {
         jPanel5.setBackground(new java.awt.Color(102, 51, 255));
 
         dateLabel.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        dateLabel.setForeground(new java.awt.Color(255, 255, 255));
         dateLabel.setText("Date :");
 
         monthComboBox.setMaximumRowCount(12);
