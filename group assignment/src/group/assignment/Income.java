@@ -67,7 +67,7 @@ public class Income extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Income");
 
-        jPanel8.setBackground(new java.awt.Color(0, 153, 153));
+        jPanel8.setBackground(new java.awt.Color(102, 51, 255));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -84,7 +84,7 @@ public class Income extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jPanel4.setBackground(new java.awt.Color(0, 153, 153));
+        jPanel4.setBackground(new java.awt.Color(102, 51, 255));
 
         notesLabel.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         notesLabel.setText("Notes :");
@@ -111,9 +111,9 @@ public class Income extends javax.swing.JFrame {
 
         newCatogoryLabel.setVisible(false);
 
-        jPanel6.setBackground(new java.awt.Color(0, 153, 153));
+        jPanel6.setBackground(new java.awt.Color(102, 51, 255));
 
-        jPanel3.setBackground(new java.awt.Color(0, 153, 153));
+        jPanel3.setBackground(new java.awt.Color(102, 51, 255));
 
         amountLabel.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         amountLabel.setText("Amount :");
@@ -136,7 +136,7 @@ public class Income extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jPanel2.setBackground(new java.awt.Color(0, 153, 153));
+        jPanel2.setBackground(new java.awt.Color(102, 51, 255));
 
         catogoryLabel.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         catogoryLabel.setText("Catogory :");
@@ -180,7 +180,7 @@ public class Income extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jPanel1.setBackground(new java.awt.Color(0, 153, 153));
+        jPanel1.setBackground(new java.awt.Color(102, 51, 255));
 
         newCatogoryLabel.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         newCatogoryLabel.setText("New Catogory :");
@@ -247,7 +247,7 @@ public class Income extends javax.swing.JFrame {
         jPanel7.setBackground(new java.awt.Color(0, 153, 153));
 
         submitButton.setBackground(new java.awt.Color(0, 204, 0));
-        submitButton.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        submitButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         submitButton.setForeground(new java.awt.Color(255, 255, 255));
         submitButton.setText("SUBMIT");
         submitButton.addActionListener(new java.awt.event.ActionListener() {
@@ -257,7 +257,7 @@ public class Income extends javax.swing.JFrame {
         });
 
         deleteButton.setBackground(new java.awt.Color(255, 0, 0));
-        deleteButton.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        deleteButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         deleteButton.setForeground(new java.awt.Color(255, 255, 255));
         deleteButton.setText("Delete");
         deleteButton.addActionListener(new java.awt.event.ActionListener() {
@@ -287,9 +287,10 @@ public class Income extends javax.swing.JFrame {
         );
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(204, 255, 255));
         jLabel1.setText("Income Management");
 
-        jPanel5.setBackground(new java.awt.Color(0, 153, 153));
+        jPanel5.setBackground(new java.awt.Color(102, 51, 255));
 
         dateLabel.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         dateLabel.setText("Date :");
@@ -387,7 +388,7 @@ public class Income extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -399,7 +400,7 @@ public class Income extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
