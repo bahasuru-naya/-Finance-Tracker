@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -25,6 +26,7 @@ public class Expenses extends javax.swing.JFrame {
         loadCategories(); // Load categories from the database
         setNewCategoryVisibility(false); // Initially hide new category adding items
         loadDataFromDatabase(); // Load data into the table from the database
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
     
     private tracker trackerRef;
@@ -38,6 +40,7 @@ public class Expenses extends javax.swing.JFrame {
         loadCategories(); // Load categories from the database
         setNewCategoryVisibility(false); // Initially hide new category adding items
         loadDataFromDatabase(); // Load data into the table from the database
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
     
     private void loadDataFromDatabase() {
@@ -121,9 +124,7 @@ public class Expenses extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         dateLabel = new javax.swing.JLabel();
-        monthComboBox = new javax.swing.JComboBox<>();
-        dateComboBox = new javax.swing.JComboBox<>();
-        yearComboBox = new javax.swing.JComboBox<>();
+        expenseDateChooser = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -360,33 +361,9 @@ public class Expenses extends javax.swing.JFrame {
         dateLabel.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         dateLabel.setText("Date :");
 
-        monthComboBox.setMaximumRowCount(12);
-        monthComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Month", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
-        monthComboBox.setToolTipText("");
-        monthComboBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                monthComboBoxActionPerformed(evt);
-            }
-        });
-
-        dateComboBox.setMaximumRowCount(12);
-        dateComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Date", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
-        dateComboBox.setToolTipText("");
-        dateComboBox.setName(""); // NOI18N
-        dateComboBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dateComboBoxActionPerformed(evt);
-            }
-        });
-
-        yearComboBox.setMaximumRowCount(12);
-        yearComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2024", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030", "2031", "2032", "2033", "2034", "2035", "2036", "2037", "2038", "2039", "2040", "2041", "2042", "2043", "2044", "2045", "2046", "2047", "2048", "2049", "2050", "2051", "2052", "2053", "2054", "2055", "2056", "2057", "2058", "2059", "2060", "2061", "2062", "2063", "2064", "2065", "2066", "2067", "2068", "2069", "2070", "2071", "2072", "2073", "2074", "2075", "2076", "2077", "2078", "2079", "2080", "2081", "2082", "2083", "2084", "2085", "2086", "2087", "2088", "2089", "2090", "2091", "2092", "2093", "2094", "2095", "2096", "2097", "2098", "2099", "2100" }));
-        yearComboBox.setToolTipText("");
-        yearComboBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                yearComboBoxActionPerformed(evt);
-            }
-        });
+        expenseDateChooser.setDateFormatString("dd-MM-yyyy");
+        expenseDateChooser.setMaximumSize(new java.awt.Dimension(214748364, 214748364));
+        expenseDateChooser.setPreferredSize(new java.awt.Dimension(87, 20));
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -395,25 +372,16 @@ public class Expenses extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(0, 0, 0)
                 .addComponent(dateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25)
-                .addComponent(yearComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22)
-                .addComponent(monthComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22)
-                .addComponent(dateComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(expenseDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(dateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(monthComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(dateComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(yearComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(dateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(1, 1, 1))
+            .addComponent(expenseDateChooser, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
@@ -509,9 +477,8 @@ public class Expenses extends javax.swing.JFrame {
         String amount = amountTextField.getText();
         String category = catogoriesComboBox.getSelectedItem().toString();
         String notes = notesTextArea.getText();
-        String date = yearComboBox.getSelectedItem().toString() + "-"
-        + monthComboBox.getSelectedItem().toString() + "-"
-        + dateComboBox.getSelectedItem().toString();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String date = dateFormat.format(expenseDateChooser.getDate());
 
         // Validate input
         if (amount.isEmpty() || category.isEmpty() || date.isEmpty()) {
@@ -545,14 +512,14 @@ public class Expenses extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Please select a row to delete.");
             return;
         }
-        int incomeID = (int) jTable1.getValueAt(selectedRow, 0); // Assuming the first column is the ID
+        int ExpenseID = (int) jTable1.getValueAt(selectedRow, 0); // Assuming the first column is the ID
         int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete this expense entry?", "Confirm Deletion", JOptionPane.YES_NO_OPTION);
         if (confirm == JOptionPane.YES_OPTION) {
             try {
                 Connection con = getCon();
                 String query = "DELETE FROM expenses WHERE expense_id = ?";
                 PreparedStatement pst = con.prepareStatement(query);
-                pst.setInt(1, incomeID);
+                pst.setInt(1, ExpenseID);
                 pst.executeUpdate();
                 JOptionPane.showMessageDialog(this, "Expense entry deleted successfully.");
                 // Update the table
@@ -563,18 +530,6 @@ public class Expenses extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_deleteButtonActionPerformed
-
-    private void monthComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_monthComboBoxActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_monthComboBoxActionPerformed
-
-    private void dateComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dateComboBoxActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_dateComboBoxActionPerformed
-
-    private void yearComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yearComboBoxActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_yearComboBoxActionPerformed
 
     /**
      * @param args the command line arguments
@@ -617,9 +572,9 @@ public class Expenses extends javax.swing.JFrame {
     private javax.swing.JTextField amountTextField;
     private javax.swing.JComboBox<String> catogoriesComboBox;
     private javax.swing.JLabel catogoryLabel;
-    private javax.swing.JComboBox<String> dateComboBox;
     private javax.swing.JLabel dateLabel;
     private javax.swing.JButton deleteButton;
+    private com.toedter.calendar.JDateChooser expenseDateChooser;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -632,13 +587,11 @@ public class Expenses extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JComboBox<String> monthComboBox;
     private javax.swing.JButton newButton;
     private javax.swing.JTextField newCategoryTextField;
     private javax.swing.JLabel newCatogoryLabel;
     private javax.swing.JLabel notesLabel;
     private javax.swing.JTextArea notesTextArea;
     private javax.swing.JButton submitButton;
-    private javax.swing.JComboBox<String> yearComboBox;
     // End of variables declaration//GEN-END:variables
 }
