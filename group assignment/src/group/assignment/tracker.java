@@ -40,7 +40,6 @@ public class tracker extends javax.swing.JFrame {
     public tracker() {
         initComponents();
         setLocationRelativeTo(null);
-        
 
     }
 
@@ -333,8 +332,9 @@ public class tracker extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-
-                ex.setVisible(true);
+                Expenses expenseGUI = new Expenses(tracker.this, username);
+                expenseGUI.setVisible(true);
+                expenseGUI.setResizable(false);
             }
         });
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -350,7 +350,7 @@ public class tracker extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-         java.awt.EventQueue.invokeLater(new Runnable() {
+        java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 Reports r1 = new Reports(tracker.this, username);
                 r1.setVisible(true);
@@ -360,7 +360,7 @@ public class tracker extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-         java.awt.EventQueue.invokeLater(new Runnable() {
+        java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 Income incomeGUI = new Income(tracker.this, username);
                 incomeGUI.setVisible(true);
@@ -373,8 +373,9 @@ public class tracker extends javax.swing.JFrame {
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-
-                ex.setVisible(true);
+                Expenses expenseGUI = new Expenses(tracker.this, username);
+                expenseGUI.setVisible(true);
+                expenseGUI.setResizable(false);
             }
         });
     }//GEN-LAST:event_jMenuItem4ActionPerformed
@@ -390,8 +391,8 @@ public class tracker extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-       this.dispose();
-       System.exit(0);
+        this.dispose();
+        System.exit(0);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
@@ -400,7 +401,7 @@ public class tracker extends javax.swing.JFrame {
                 jFrame1.setSize(400, 350);
                 jFrame1.setVisible(true);
                 jFrame1.setLocationRelativeTo(null);
-             }
+            }
         });
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
@@ -408,25 +409,22 @@ public class tracker extends javax.swing.JFrame {
     public void updateBalance() {
         // Get current user's total income from the database
         double totalIncome = getTotalIncomeForUser(username);
-        double totalExpenses=0;
-        double totalBalance= totalIncome-totalExpenses;
-        
+        double totalExpenses = 0;
+        double totalBalance = totalIncome - totalExpenses;
 
         // Update jLabel6 with the fetched total income
         jLabel6.setText("Rs. " + String.format("%.2f", totalIncome));
         jLabel7.setText("Rs. " + String.format("%.2f", totalExpenses));
         jLabel8.setText("Rs. " + String.format("%.2f", totalBalance));
-        
-        if(totalBalance<0)
-        {
+
+        if (totalBalance < 0) {
             jLabel8.setForeground(Color.RED);
             jLabel9.setVisible(true);
-        }
-        else{
+        } else {
             jLabel9.setVisible(false);
             jLabel8.setForeground(Color.BLACK);
         }
-        
+
         double absBalance = Math.abs(totalBalance);
         //show pie chart
         DefaultPieDataset pieDataset = new DefaultPieDataset();
@@ -437,13 +435,13 @@ public class tracker extends javax.swing.JFrame {
         pieChart.setBackgroundPaint(Color.WHITE);
         pieChart.setBorderVisible(false);
         pieChart.setAntiAlias(false);
-        final PiePlot3D plot = ( PiePlot3D ) pieChart.getPlot( );             
-        plot.setStartAngle( 270 );             
-        plot.setForegroundAlpha( 0.60f );                
+        final PiePlot3D plot = (PiePlot3D) pieChart.getPlot();
+        plot.setStartAngle(270);
+        plot.setForegroundAlpha(0.60f);
         Rotator rotator = new Rotator((PiePlot3D) pieChart.getPlot());
-        rotator.start();      
+        rotator.start();
         ChartPanel piePanel = new ChartPanel(pieChart);
-       
+
         jPanel2.removeAll();
         jPanel2.add(piePanel, BorderLayout.CENTER);
         jPanel2.validate();
@@ -487,6 +485,44 @@ public class tracker extends javax.swing.JFrame {
         return totalIncome;
     }
 
+    private double getTotalExpenseForUser(String username) {
+        double totalExpenses = 0.0;
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            con = DBconnection.getCon(); // Get database connection
+            String query = "SELECT SUM(amount) AS total_expense FROM expenses WHERE user_name = ?";
+            pstmt = con.prepareStatement(query);
+            pstmt.setString(1, username);
+            rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                totalExpenses = rs.getDouble("total_expense");
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            // Close resources
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+
+        return totalExpenses;
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -524,19 +560,22 @@ public class tracker extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 }
 
-
 class Rotator extends Timer implements ActionListener {
 
-    /** The plot. */
+    /**
+     * The plot.
+     */
     private PiePlot3D plot;
 
-    /** The angle. */
+    /**
+     * The angle.
+     */
     private int angle = 270;
 
     /**
      * Constructor.
      *
-     * @param plot  the plot.
+     * @param plot the plot.
      */
     Rotator(PiePlot3D plot) {
         super(100, null);
@@ -547,7 +586,7 @@ class Rotator extends Timer implements ActionListener {
     /**
      * Modifies the starting angle.
      *
-     * @param event  the action event.
+     * @param event the action event.
      */
     public void actionPerformed(ActionEvent event) {
         this.plot.setStartAngle(this.angle);

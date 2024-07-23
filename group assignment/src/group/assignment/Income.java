@@ -189,6 +189,12 @@ public class Income extends javax.swing.JFrame {
         newCatogoryLabel.setForeground(new java.awt.Color(255, 255, 255));
         newCatogoryLabel.setText("New Catogory :");
 
+        newCategoryTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newCategoryTextFieldActionPerformed(evt);
+            }
+        });
+
         addButton.setBackground(new java.awt.Color(0, 0, 255));
         addButton.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
         addButton.setForeground(new java.awt.Color(255, 255, 255));
@@ -559,6 +565,10 @@ public class Income extends javax.swing.JFrame {
     private void yearComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yearComboBoxActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_yearComboBoxActionPerformed
+
+    private void newCategoryTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newCategoryTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_newCategoryTextFieldActionPerformed
 
     /**
      * @param args the command line arguments
