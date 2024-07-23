@@ -467,6 +467,17 @@ public class Income extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Error loading categories: " + ex.getMessage());
         }
     }
+    
+    public static void main(String args[]) {
+       
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Income().setVisible(true);
+            }
+        });
+    }
 
     private void newButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newButtonActionPerformed
         // Check if the new category adding fields are currently visible
