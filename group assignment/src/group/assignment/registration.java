@@ -135,6 +135,7 @@ public class registration extends javax.swing.JFrame {
         jPasswordField2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jPanel1.add(jPasswordField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 300, 180, -1));
 
+        jCheckBox1.setBackground(new java.awt.Color(225, 241, 253));
         jCheckBox1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jCheckBox1.setForeground(new java.awt.Color(0, 0, 0));
         jCheckBox1.setText("Show Passwords");
@@ -179,7 +180,7 @@ public class registration extends javax.swing.JFrame {
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(48, 48, 48)
+                .addGap(47, 47, 47)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 485, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
