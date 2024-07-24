@@ -83,7 +83,7 @@ public class Income extends javax.swing.JFrame {
         kGradientPanel1.setkStartColor(new java.awt.Color(165, 208, 255));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(50, 60, 250));
+        jLabel1.setForeground(new java.awt.Color(40, 40, 230));
         jLabel1.setText("Income Management");
 
         kGradientPanel6.setkEndColor(new java.awt.Color(225, 241, 253));
@@ -119,7 +119,7 @@ public class Income extends javax.swing.JFrame {
             }
         });
 
-        newButton.setBackground(new java.awt.Color(0, 0, 255));
+        newButton.setBackground(new java.awt.Color(40, 40, 255));
         newButton.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
         newButton.setForeground(new java.awt.Color(255, 255, 255));
         newButton.setText("New");
@@ -165,7 +165,7 @@ public class Income extends javax.swing.JFrame {
             }
         });
 
-        addButton.setBackground(new java.awt.Color(0, 0, 255));
+        addButton.setBackground(new java.awt.Color(40, 40, 255));
         addButton.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
         addButton.setForeground(new java.awt.Color(255, 255, 255));
         addButton.setText("Add");
@@ -209,7 +209,7 @@ public class Income extends javax.swing.JFrame {
         notesLabel.setForeground(new java.awt.Color(0, 0, 0));
         notesLabel.setText("Notes :");
 
-        submitButton.setBackground(new java.awt.Color(0, 0, 255));
+        submitButton.setBackground(new java.awt.Color(40, 40, 255));
         submitButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         submitButton.setForeground(new java.awt.Color(255, 255, 255));
         submitButton.setText("SUBMIT");
@@ -219,7 +219,7 @@ public class Income extends javax.swing.JFrame {
             }
         });
 
-        deleteButton.setBackground(new java.awt.Color(0, 0, 255));
+        deleteButton.setBackground(new java.awt.Color(40, 40, 255));
         deleteButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         deleteButton.setForeground(new java.awt.Color(255, 255, 255));
         deleteButton.setText("DELETE");
@@ -449,17 +449,6 @@ public class Income extends javax.swing.JFrame {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, "Error loading categories: " + ex.getMessage());
         }
-    }
-
-    public static void main(String args[]) {
-
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Income().setVisible(true);
-            }
-        });
     }
 
     private void newButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newButtonActionPerformed
