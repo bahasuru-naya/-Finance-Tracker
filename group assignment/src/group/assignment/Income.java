@@ -458,15 +458,29 @@ public class Income extends javax.swing.JFrame {
         catogoriesComboBox.removeAllItems(); // Clear existing items
         try {
             Connection con = getCon();
-            String query = "SELECT DISTINCT category FROM incomes";
+            String query = "SELECT DISTINCT category FROM incomes WHERE user_name = ?";
             PreparedStatement pst = con.prepareStatement(query);
+            pst.setString(1, username); // Use the username variable to filter categories
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
                 catogoriesComboBox.addItem(rs.getString("category"));
             }
+            rs.close();
+            pst.close();
+            con.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, "Error loading categories: " + ex.getMessage());
         }
+    }
+
+    public static void main(String args[]) {
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Income().setVisible(true);
+            }
+        });
     }
 
     private void newButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newButtonActionPerformed
