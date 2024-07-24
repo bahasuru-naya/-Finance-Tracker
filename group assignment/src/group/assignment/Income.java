@@ -50,6 +50,7 @@ public class Income extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
         kGradientPanel1 = new keeptoo.KGradientPanel();
         jLabel1 = new javax.swing.JLabel();
         kGradientPanel6 = new keeptoo.KGradientPanel();
@@ -75,6 +76,10 @@ public class Income extends javax.swing.JFrame {
         kGradientPanel5 = new keeptoo.KGradientPanel();
         amountLabel = new javax.swing.JLabel();
         amountTextField = new javax.swing.JTextField();
+        editButton = new javax.swing.JButton();
+
+        jRadioButtonMenuItem1.setSelected(true);
+        jRadioButtonMenuItem1.setText("jRadioButtonMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Income");
@@ -287,6 +292,16 @@ public class Income extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
+        editButton.setBackground(new java.awt.Color(40, 40, 255));
+        editButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        editButton.setForeground(new java.awt.Color(255, 255, 255));
+        editButton.setText("EDIT");
+        editButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout kGradientPanel6Layout = new javax.swing.GroupLayout(kGradientPanel6);
         kGradientPanel6.setLayout(kGradientPanel6Layout);
         kGradientPanel6Layout.setHorizontalGroup(
@@ -296,7 +311,7 @@ public class Income extends javax.swing.JFrame {
                 .addGroup(kGradientPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(kGradientPanel6Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1081, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(24, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(kGradientPanel6Layout.createSequentialGroup()
                         .addGroup(kGradientPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(kGradientPanel6Layout.createSequentialGroup()
@@ -308,21 +323,23 @@ public class Income extends javax.swing.JFrame {
                             .addComponent(kGradientPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                         .addGroup(kGradientPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(kGradientPanel6Layout.createSequentialGroup()
-                                .addComponent(submitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(submitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(21, 21, 21)
+                                .addComponent(editButton, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(22, 22, 22)
+                                .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(kGradientPanel6Layout.createSequentialGroup()
                                 .addComponent(dateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(33, 33, 33)
                                 .addComponent(yearComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(27, 27, 27)
                                 .addComponent(monthComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(27, 27, 27)
                                 .addComponent(dateComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(24, Short.MAX_VALUE))))
         );
         kGradientPanel6Layout.setVerticalGroup(
             kGradientPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -338,8 +355,9 @@ public class Income extends javax.swing.JFrame {
                             .addComponent(yearComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(kGradientPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(submitButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(deleteButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(submitButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(editButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, kGradientPanel6Layout.createSequentialGroup()
                         .addComponent(notesLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
@@ -474,23 +492,46 @@ public class Income extends javax.swing.JFrame {
             return;
         }
 
-        // Insert data into the database
         try {
             Connection con = getCon();
-            String query = "INSERT INTO incomes (user_name, amount, category, date, notes) VALUES (?, ?, ?, ?, ?)";
-            PreparedStatement pst = con.prepareStatement(query);
-            pst.setString(1, username);
-            pst.setString(2, amount);
-            pst.setString(3, category);
-            pst.setString(4, date);
-            pst.setString(5, notes);
-            pst.executeUpdate();
-            JOptionPane.showMessageDialog(this, "Income added successfully.");
+            if (isEditMode) {
+                // Update the existing record
+                String query = "UPDATE incomes SET amount = ?, category = ?, date = ?, notes = ? WHERE income_id = ?";
+                PreparedStatement pst = con.prepareStatement(query);
+                pst.setString(1, amount);
+                pst.setString(2, category);
+                pst.setString(3, date);
+                pst.setString(4, notes);
+                pst.setInt(5, editIncomeID);
+                pst.executeUpdate();
+                JOptionPane.showMessageDialog(this, "Income updated successfully.");
+            } else {
+                // Insert new record
+                String query = "INSERT INTO incomes (user_name, amount, category, date, notes) VALUES (?, ?, ?, ?, ?)";
+                PreparedStatement pst = con.prepareStatement(query);
+                pst.setString(1, username);
+                pst.setString(2, amount);
+                pst.setString(3, category);
+                pst.setString(4, date);
+                pst.setString(5, notes);
+                pst.executeUpdate();
+                JOptionPane.showMessageDialog(this, "Income added successfully.");
+            }
             loadDataFromDatabase(); // Refresh the table
             trackerRef.updateBalance();
 
+            // Reset form fields and flags
+            amountTextField.setText("");
+            catogoriesComboBox.setSelectedIndex(0);
+            yearComboBox.setSelectedIndex(0);
+            monthComboBox.setSelectedIndex(0);
+            dateComboBox.setSelectedIndex(0);
+            notesTextArea.setText("");
+            isEditMode = false;
+            editIncomeID = -1;
+
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this, "Error adding income: " + ex.getMessage());
+            JOptionPane.showMessageDialog(this, "Error adding/updating income: " + ex.getMessage());
         }
     }//GEN-LAST:event_submitButtonActionPerformed
 
@@ -553,6 +594,38 @@ public class Income extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_newCategoryTextFieldActionPerformed
 
+    private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = jTable1.getSelectedRow();
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Please select a row to edit.");
+            return;
+        }
+
+        // Retrieve data from the selected row
+        editIncomeID = (int) jTable1.getValueAt(selectedRow, 0);
+        float amount = (float) jTable1.getValueAt(selectedRow, 1);
+        String category = (String) jTable1.getValueAt(selectedRow, 2);
+        String date = (String) jTable1.getValueAt(selectedRow, 3);
+        String notes = (String) jTable1.getValueAt(selectedRow, 4);
+
+        // Populate the form fields with the selected row's data
+        amountTextField.setText(String.valueOf(amount));
+        catogoriesComboBox.setSelectedItem(category);
+        // Split the date to populate year, month, and date combo boxes
+        String[] dateParts = date.split("-");
+        yearComboBox.setSelectedItem(dateParts[0]);
+        monthComboBox.setSelectedItem(dateParts[1]);
+        dateComboBox.setSelectedItem(dateParts[2]);
+        notesTextArea.setText(notes);
+
+        // Set the edit mode flag to true
+        isEditMode = true;
+    }//GEN-LAST:event_editButtonActionPerformed
+
+    private boolean isEditMode = false;
+    private int editIncomeID = -1; // To store the ID of the income being edited
+
     /**
      * @param args the command line arguments
      */
@@ -566,7 +639,9 @@ public class Income extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> dateComboBox;
     private javax.swing.JLabel dateLabel;
     private javax.swing.JButton deleteButton;
+    private javax.swing.JButton editButton;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
