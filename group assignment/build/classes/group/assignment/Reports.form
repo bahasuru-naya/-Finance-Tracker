@@ -74,9 +74,9 @@
                   <Component id="jPanel6" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jPanel7" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="377" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="148" max="-2" attributes="0"/>
                   <Component id="downloadExcelButton" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
+                  <EmptySpace pref="278" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -647,6 +647,9 @@
         </Container>
         <Component class="javax.swing.JButton" name="downloadExcelButton">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="33" red="33" type="rgb"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Excel Download"/>
           </Properties>
           <Events>

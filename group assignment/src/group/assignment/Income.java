@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -19,6 +20,13 @@ public class Income extends javax.swing.JFrame {
         loadCategories(); // Load categories from the database
         setNewCategoryVisibility(false); // Initially hide new category adding items
         loadDataFromDatabase(); // Load data into the table from the database
+        try {
+            // Load the icon from the resources
+            ImageIcon icon = new ImageIcon("./src/pics/pic17.png");
+            setIconImage(icon.getImage());
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(this, "Icon image not found.");
+        }
     }
 
     public Income(tracker trackerRef, String username) {
@@ -29,6 +37,13 @@ public class Income extends javax.swing.JFrame {
         loadCategories(); // Load categories from the database
         setNewCategoryVisibility(false); // Initially hide new category adding items
         loadDataFromDatabase(); // Load data into the table from the database
+        try {
+            // Load the icon from the resources
+            ImageIcon icon = new ImageIcon("./src/pics/pic17.png");
+            setIconImage(icon.getImage());
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(this, "Icon image not found.");
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -64,15 +79,15 @@ public class Income extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Income");
 
-        kGradientPanel1.setkEndColor(new java.awt.Color(102, 51, 255));
-        kGradientPanel1.setkStartColor(new java.awt.Color(153, 153, 255));
+        kGradientPanel1.setkEndColor(new java.awt.Color(165, 208, 255));
+        kGradientPanel1.setkStartColor(new java.awt.Color(165, 208, 255));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(204, 255, 255));
+        jLabel1.setForeground(new java.awt.Color(50, 60, 250));
         jLabel1.setText("Income Management");
 
-        kGradientPanel6.setkEndColor(new java.awt.Color(102, 51, 255));
-        kGradientPanel6.setkStartColor(new java.awt.Color(153, 153, 255));
+        kGradientPanel6.setkEndColor(new java.awt.Color(225, 241, 253));
+        kGradientPanel6.setkStartColor(new java.awt.Color(225, 241, 253));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -89,12 +104,12 @@ public class Income extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        kGradientPanel3.setkEndColor(new java.awt.Color(102, 51, 255));
+        kGradientPanel3.setkEndColor(new java.awt.Color(225, 241, 253));
         kGradientPanel3.setkGradientFocus(600);
-        kGradientPanel3.setkStartColor(new java.awt.Color(153, 153, 255));
+        kGradientPanel3.setkStartColor(new java.awt.Color(225, 241, 253));
 
         catogoryLabel.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        catogoryLabel.setForeground(new java.awt.Color(255, 255, 255));
+        catogoryLabel.setForeground(new java.awt.Color(0, 0, 0));
         catogoryLabel.setText("Catogory :");
 
         catogoriesComboBox.setToolTipText("");
@@ -136,12 +151,12 @@ public class Income extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        kGradientPanel4.setkEndColor(new java.awt.Color(102, 51, 255));
+        kGradientPanel4.setkEndColor(new java.awt.Color(225, 241, 253));
         kGradientPanel4.setkGradientFocus(600);
-        kGradientPanel4.setkStartColor(new java.awt.Color(153, 153, 255));
+        kGradientPanel4.setkStartColor(new java.awt.Color(225, 241, 253));
 
         newCatogoryLabel.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        newCatogoryLabel.setForeground(new java.awt.Color(255, 255, 255));
+        newCatogoryLabel.setForeground(new java.awt.Color(0, 0, 0));
         newCatogoryLabel.setText("New Catogory :");
 
         newCategoryTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -191,10 +206,10 @@ public class Income extends javax.swing.JFrame {
         jScrollPane2.setViewportView(notesTextArea);
 
         notesLabel.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        notesLabel.setForeground(new java.awt.Color(255, 255, 255));
+        notesLabel.setForeground(new java.awt.Color(0, 0, 0));
         notesLabel.setText("Notes :");
 
-        submitButton.setBackground(new java.awt.Color(0, 204, 0));
+        submitButton.setBackground(new java.awt.Color(0, 0, 255));
         submitButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         submitButton.setForeground(new java.awt.Color(255, 255, 255));
         submitButton.setText("SUBMIT");
@@ -204,10 +219,10 @@ public class Income extends javax.swing.JFrame {
             }
         });
 
-        deleteButton.setBackground(new java.awt.Color(255, 0, 0));
+        deleteButton.setBackground(new java.awt.Color(0, 0, 255));
         deleteButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         deleteButton.setForeground(new java.awt.Color(255, 255, 255));
-        deleteButton.setText("Delete");
+        deleteButton.setText("DELETE");
         deleteButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteButtonActionPerformed(evt);
@@ -215,7 +230,7 @@ public class Income extends javax.swing.JFrame {
         });
 
         dateLabel.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        dateLabel.setForeground(new java.awt.Color(255, 255, 255));
+        dateLabel.setForeground(new java.awt.Color(0, 0, 0));
         dateLabel.setText("Date :");
 
         yearComboBox.setMaximumRowCount(12);
@@ -246,12 +261,12 @@ public class Income extends javax.swing.JFrame {
             }
         });
 
-        kGradientPanel5.setkEndColor(new java.awt.Color(102, 51, 255));
+        kGradientPanel5.setkEndColor(new java.awt.Color(225, 241, 253));
         kGradientPanel5.setkGradientFocus(600);
-        kGradientPanel5.setkStartColor(new java.awt.Color(153, 153, 255));
+        kGradientPanel5.setkStartColor(new java.awt.Color(225, 241, 253));
 
         amountLabel.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        amountLabel.setForeground(new java.awt.Color(255, 255, 255));
+        amountLabel.setForeground(new java.awt.Color(0, 0, 0));
         amountLabel.setText("Amount :");
 
         javax.swing.GroupLayout kGradientPanel5Layout = new javax.swing.GroupLayout(kGradientPanel5);
@@ -435,9 +450,9 @@ public class Income extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Error loading categories: " + ex.getMessage());
         }
     }
-    
+
     public static void main(String args[]) {
-       
+
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
