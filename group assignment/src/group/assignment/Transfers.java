@@ -10,7 +10,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -23,9 +26,20 @@ public class Transfers extends javax.swing.JFrame {
 
     private tracker trackerRef;
     private String username;
+    private boolean isEditMode = false;
+    private int editTransferID = -1;
 
     public Transfers() {
         initComponents();
+        setLocationRelativeTo(null);
+        loadDataFromDatabase(); // Load data into the table from the database
+        try {
+            // Load the icon from the resources
+            ImageIcon icon = new ImageIcon("./src/pics/pic17.png");
+            setIconImage(icon.getImage());
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(this, "Icon image not found.");
+        }
     }
 
     public Transfers(tracker trackerRef, String username) {
@@ -33,7 +47,7 @@ public class Transfers extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         this.trackerRef = trackerRef;
         this.username = username; // Assign username passed from tracker class
-        //loadDataFromDatabase(); // Load data into the table from the database
+        loadDataFromDatabase(); // Load data into the table from the database
         try {
             // Load the icon from the resources
             ImageIcon icon = new ImageIcon("./src/pics/pic17.png");
@@ -48,12 +62,12 @@ public class Transfers extends javax.swing.JFrame {
         model.setRowCount(0); // Clear existing rows from the table
         try {
             Connection con = DBconnection.getCon();
-            String query = "SELECT * FROM transfer WHERE user_name = ?";
+            String query = "SELECT * FROM transfers WHERE user_name = ?";
             PreparedStatement pst = con.prepareStatement(query);
             pst.setString(1, username); // Assuming you have the username stored in a variable
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
-                int transfer = rs.getInt("transfer_id");
+                int transfer_id = rs.getInt("transfer_id");
                 int acc_number = rs.getInt("acc_number");
                 String acc_name = rs.getString("acc_name");
                 float amount = rs.getFloat("amount");
@@ -61,7 +75,8 @@ public class Transfers extends javax.swing.JFrame {
                 String date = rs.getString("date");
                 String reference = rs.getString("reference");
 
-                model.addRow(new Object[]{date, acc_number, acc_name, bank_name, reference, amount});
+                // Add data to the table
+                model.addRow(new Object[]{transfer_id, date, acc_number, acc_name, bank_name, reference, amount});
             }
             rs.close();
             pst.close();
@@ -119,18 +134,22 @@ public class Transfers extends javax.swing.JFrame {
 
         transferTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Date", "Account Number", "Account Name", "Bank Name", "Reference", "Amount"
+                "ID", "Date", "Account Number", "Account Name", "Bank Name", "Reference", "Amount"
             }
         ));
         jScrollPane1.setViewportView(transferTable);
+        if (transferTable.getColumnModel().getColumnCount() > 0) {
+            transferTable.getColumnModel().getColumn(0).setMaxWidth(30);
+            transferTable.getColumnModel().getColumn(3).setResizable(false);
+        }
 
         editButton.setBackground(new java.awt.Color(40, 40, 255));
         editButton.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
@@ -170,13 +189,13 @@ public class Transfers extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 631, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
+            .addGroup(jPanel9Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(editButton, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(transferButton, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(11, 11, 11)
-                .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(editButton, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(transferButton, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel9Layout.setVerticalGroup(
@@ -332,7 +351,7 @@ public class Transfers extends javax.swing.JFrame {
         jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("Date : ");
 
-        transferDateChooser.setDateFormatString("dd-MM-yyyy");
+        transferDateChooser.setDateFormatString("yyyy-MM-dd");
         transferDateChooser.setMaximumSize(new java.awt.Dimension(214748364, 214748364));
         transferDateChooser.setPreferredSize(new java.awt.Dimension(87, 20));
 
@@ -429,11 +448,19 @@ public class Transfers extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private boolean isEditMode = false;
-    private int editTransferID = -1; // To store the ID of the income being edited
+    private void resetForm() {
+        bankNameTextField.setText("");
+        accNameTextField.setText("");
+        accNumberTextField.setText("");
+        confirmAccNumberTextField.setText("");
+        amountTextField.setText("");
+        referenceTextField.setText("");
+        transferDateChooser.setDate(null);
+        isEditMode = false;
+        editTransferID = -1;
+    }
 
     private void transferButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transferButtonActionPerformed
-        // Get user input
         String bank_name = bankNameTextField.getText();
         String acc_name = accNameTextField.getText();
         String acc_number = accNumberTextField.getText();
@@ -443,30 +470,32 @@ public class Transfers extends javax.swing.JFrame {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String date = dateFormat.format(transferDateChooser.getDate());
 
-        // Validate input
         if (bank_name.isEmpty() || acc_name.isEmpty() || date.isEmpty() || acc_number.isEmpty() || acc_number_confirm.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Please fill in all fields.");
+            return;
+        }
+
+        if (!acc_number.equals(acc_number_confirm)) {
+            JOptionPane.showMessageDialog(this, "Account numbers do not match.");
             return;
         }
 
         try {
             Connection con = getCon();
             if (isEditMode) {
-                // Update the existing record
-                String query = "UPDATE transfers SET acc_number = ?, acc_name = ?, bank_name = ?, reference = ?, amount = ?, date=? WHERE transfer_id = ?";
+                String query = "UPDATE transfers SET acc_number = ?, acc_name = ?, bank_name = ?, reference = ?, amount = ?, date = ? WHERE transfer_id = ?";
                 PreparedStatement pst = con.prepareStatement(query);
                 pst.setString(1, acc_number);
                 pst.setString(2, acc_name);
                 pst.setString(3, bank_name);
                 pst.setString(4, reference);
-                pst.setString(4, amount);
-                pst.setString(4, date);
-                pst.setInt(5, editTransferID);
+                pst.setString(5, amount);
+                pst.setString(6, date);
+                pst.setInt(7, editTransferID);
                 pst.executeUpdate();
                 JOptionPane.showMessageDialog(this, "Transfer updated successfully.");
             } else {
-                // Insert new record
-                String query = "INSERT INTO transfers (user_name,acc_number,acc_name,bank_name,reference,amount,date) VALUES (?,?,?,?,?,?,?)";
+                String query = "INSERT INTO transfers (user_name, acc_number, acc_name, bank_name, reference, amount, date) VALUES (?, ?, ?, ?, ?, ?, ?)";
                 PreparedStatement pst = con.prepareStatement(query);
                 pst.setString(1, username);
                 pst.setString(2, acc_number);
@@ -480,25 +509,16 @@ public class Transfers extends javax.swing.JFrame {
             }
             loadDataFromDatabase(); // Refresh the table
             trackerRef.updateBalance();
-            // Reset form fields and flags
-            bankNameTextField.setText("");
-            accNameTextField.setText("");
-            accNumberTextField.setText("");
-            confirmAccNumberTextField.setText("");
-            amountTextField.setText("");
-            referenceTextField.setText("");
 
-            isEditMode = false;
-            editTransferID = -1;
+            // Reset form fields and flags
+            resetForm();
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this, "Error adding/updating income: " + ex.getMessage());
+            JOptionPane.showMessageDialog(this, "Error adding/updating transfer: " + ex.getMessage());
         }
-
     }//GEN-LAST:event_transferButtonActionPerformed
 
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
-        // TODO add your handling code here:
         int selectedRow = transferTable.getSelectedRow();
         if (selectedRow == -1) {
             JOptionPane.showMessageDialog(this, "Please select a row to edit.");
@@ -506,28 +526,55 @@ public class Transfers extends javax.swing.JFrame {
         }
 
         // Retrieve data from the selected row
-        editIncomeID = (int) jTable1.getValueAt(selectedRow, 0);
-        float amount = (float) jTable1.getValueAt(selectedRow, 1);
-        String category = (String) jTable1.getValueAt(selectedRow, 2);
-        String date = (String) jTable1.getValueAt(selectedRow, 3);
-        String notes = (String) jTable1.getValueAt(selectedRow, 4);
+        editTransferID = (int) transferTable.getValueAt(selectedRow, 0); // Assuming the first column is the ID
+        String date = (String) transferTable.getValueAt(selectedRow, 1);
+        int acc_number = (int) transferTable.getValueAt(selectedRow, 2);
+        String acc_name = (String) transferTable.getValueAt(selectedRow, 3);
+        String bank_name = (String) transferTable.getValueAt(selectedRow, 4);
+        String reference = (String) transferTable.getValueAt(selectedRow, 5);
+        float amount = (float) transferTable.getValueAt(selectedRow, 6);
 
         // Populate the form fields with the selected row's data
+        bankNameTextField.setText(bank_name);
+        accNameTextField.setText(acc_name);
+        accNumberTextField.setText(String.valueOf(acc_number));
+        confirmAccNumberTextField.setText(String.valueOf(acc_number));
         amountTextField.setText(String.valueOf(amount));
-        catogoriesComboBox.setSelectedItem(category);
-        // Split the date to populate year, month, and date combo boxes
-        String[] dateParts = date.split("-");
-        yearComboBox.setSelectedItem(dateParts[0]);
-        monthComboBox.setSelectedItem(dateParts[1]);
-        dateComboBox.setSelectedItem(dateParts[2]);
-        notesTextArea.setText(notes);
+        referenceTextField.setText(reference);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            transferDateChooser.setDate(dateFormat.parse(date));
+        } catch (ParseException ex) {
+            JOptionPane.showMessageDialog(this, "Error parsing date: " + ex.getMessage());
+        }
 
         // Set the edit mode flag to true
         isEditMode = true;
     }//GEN-LAST:event_editButtonActionPerformed
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
-        // TODO add your handling code here:
+        int selectedRow = transferTable.getSelectedRow();
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Please select a row to delete.");
+            return;
+        }
+        int transferID = (int) transferTable.getValueAt(selectedRow, 0); // Assuming the first column is the ID
+        int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete this transfer?", "Confirm Deletion", JOptionPane.YES_NO_OPTION);
+        if (confirm == JOptionPane.YES_OPTION) {
+            try {
+                Connection con = getCon();
+                String query = "DELETE FROM transfers WHERE transfer_id = ?";
+                PreparedStatement pst = con.prepareStatement(query);
+                pst.setInt(1, transferID);
+                pst.executeUpdate();
+                JOptionPane.showMessageDialog(this, "Transfer deleted successfully.");
+                // Update the table
+                loadDataFromDatabase();
+                trackerRef.updateBalance();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(this, "Error deleting transfer: " + ex.getMessage());
+            }
+        }
     }//GEN-LAST:event_deleteButtonActionPerformed
 
     /**
