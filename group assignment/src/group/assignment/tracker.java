@@ -36,6 +36,7 @@ public class tracker extends javax.swing.JFrame {
     Income i = new Income();
     Reports r = new Reports();
     Expenses ex = new Expenses();
+    Transfers t = new Transfers();
 
     public tracker() {
         initComponents();
@@ -77,6 +78,7 @@ public class tracker extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
+        transferButton = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -207,12 +209,20 @@ public class tracker extends javax.swing.JFrame {
         jLabel9.setText("Warning!!! Current income insufficient to cover expenses.");
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 550, 380, 30));
 
+        transferButton.setText("Transfer");
+        transferButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                transferButtonActionPerformed(evt);
+            }
+        });
+        jPanel1.add(transferButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 590, 140, 60));
+
         jMenuBar1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         jMenu1.setText("File");
         jMenu1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMenuItem1.setText("Generate Report");
         jMenuItem1.setToolTipText("Generate Report");
@@ -223,7 +233,7 @@ public class tracker extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem1);
 
-        jMenuItem6.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem6.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMenuItem6.setText("Sign out");
         jMenuItem6.setToolTipText("Sign out");
@@ -250,7 +260,7 @@ public class tracker extends javax.swing.JFrame {
         jMenu2.setText("Edit");
         jMenu2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_I, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_I, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMenuItem3.setText("Incomes");
         jMenuItem3.setToolTipText("Incomes");
@@ -261,7 +271,7 @@ public class tracker extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem3);
 
-        jMenuItem4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMenuItem4.setText("Expences");
         jMenuItem4.setToolTipText("Expences");
@@ -277,7 +287,7 @@ public class tracker extends javax.swing.JFrame {
         jMenu3.setText("About");
         jMenu3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        jMenuItem5.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem5.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMenuItem5.setText("About us");
         jMenuItem5.setToolTipText("About us");
@@ -404,6 +414,17 @@ public class tracker extends javax.swing.JFrame {
             }
         });
     }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void transferButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transferButtonActionPerformed
+        // TODO add your handling code here:
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                Transfers tr = new Transfers(tracker.this, username);
+                tr.setVisible(true);
+                tr.setResizable(false);
+            }
+        });
+    }//GEN-LAST:event_transferButtonActionPerformed
 
     // Update balance label
     public void updateBalance() {
@@ -557,6 +578,7 @@ public class tracker extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JButton transferButton;
     // End of variables declaration//GEN-END:variables
 }
 
