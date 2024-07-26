@@ -126,7 +126,7 @@ public class Transfers extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         transferDateChooser = new com.toedter.calendar.JDateChooser();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(165, 208, 255));
 

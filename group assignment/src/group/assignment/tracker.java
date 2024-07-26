@@ -63,6 +63,7 @@ public class tracker extends javax.swing.JFrame {
         jFrame1 = new javax.swing.JFrame();
         jPanel3 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -79,6 +80,8 @@ public class tracker extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         transferButton = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -125,6 +128,17 @@ public class tracker extends javax.swing.JFrame {
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("FINANCE TRACKER");
         setResizable(false);
@@ -136,12 +150,12 @@ public class tracker extends javax.swing.JFrame {
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 450, 75, -1));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel2.setText("Expenses");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 490, 80, -1));
+        jLabel2.setText("Transfers");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 530, 80, -1));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel3.setText("Balance");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 530, 66, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 570, 90, -1));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel4.setText("WELCOME TO FINANCE TRACKER");
@@ -186,7 +200,7 @@ public class tracker extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 590, 150, 60));
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 640, 150, 60));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel6.setText("Rs. 0.00");
@@ -198,7 +212,7 @@ public class tracker extends javax.swing.JFrame {
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel8.setText("Rs. 0.00");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 530, -1, -1));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 570, -1, -1));
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 204));
         jPanel2.setLayout(new java.awt.BorderLayout());
@@ -207,7 +221,7 @@ public class tracker extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 0, 51));
         jLabel9.setText("Warning!!! Current income insufficient to cover expenses.");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 550, 380, 30));
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 610, 380, 30));
 
         transferButton.setText("Transfer");
         transferButton.addActionListener(new java.awt.event.ActionListener() {
@@ -215,7 +229,15 @@ public class tracker extends javax.swing.JFrame {
                 transferButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(transferButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 590, 140, 60));
+        jPanel1.add(transferButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 530, 210, 30));
+
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel11.setText("Expenses");
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 490, 80, -1));
+
+        jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel12.setText("Rs. 0.00");
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 530, -1, -1));
 
         jMenuBar1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
@@ -306,13 +328,11 @@ public class tracker extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 590, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 604, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 667, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 714, Short.MAX_VALUE)
         );
 
         pack();
@@ -430,12 +450,14 @@ public class tracker extends javax.swing.JFrame {
     public void updateBalance() {
         // Get current user's total income from the database
         double totalIncome = getTotalIncomeForUser(username);
-        double totalExpenses = 0;
-        double totalBalance = totalIncome - totalExpenses;
+        double totalExpenses = getTotalExpenseForUser(username);
+        double totalTransfers = getTotalTransferForUser(username);
+        double totalBalance = totalIncome - totalExpenses - totalTransfers;
 
         // Update jLabel6 with the fetched total income
         jLabel6.setText("Rs. " + String.format("%.2f", totalIncome));
         jLabel7.setText("Rs. " + String.format("%.2f", totalExpenses));
+        jLabel12.setText("Rs. " + String.format("%.2f", totalTransfers));
         jLabel8.setText("Rs. " + String.format("%.2f", totalBalance));
 
         if (totalBalance < 0) {
@@ -451,6 +473,7 @@ public class tracker extends javax.swing.JFrame {
         DefaultPieDataset pieDataset = new DefaultPieDataset();
         pieDataset.setValue("Incomes", Double.valueOf(totalIncome));
         pieDataset.setValue("Expences", Double.valueOf(totalExpenses));
+        pieDataset.setValue("Transfers", Double.valueOf(totalTransfers));
         pieDataset.setValue("Balance", Double.valueOf(absBalance));
         JFreeChart pieChart = ChartFactory.createPieChart3D("Finance Overview", pieDataset, true, true, false);
         pieChart.setBackgroundPaint(Color.WHITE);
@@ -544,6 +567,44 @@ public class tracker extends javax.swing.JFrame {
         return totalExpenses;
     }
 
+    private double getTotalTransferForUser(String username) {
+        double totalTransfers = 0.0;
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            con = DBconnection.getCon(); // Get database connection
+            String query = "SELECT SUM(amount) AS total_transfer FROM transfers WHERE user_name = ?";
+            pstmt = con.prepareStatement(query);
+            pstmt.setString(1, username);
+            rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                totalTransfers = rs.getDouble("total_transfer");
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            // Close resources
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+
+        return totalTransfers;
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -556,6 +617,8 @@ public class tracker extends javax.swing.JFrame {
     private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -578,6 +641,7 @@ public class tracker extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JButton transferButton;
     // End of variables declaration//GEN-END:variables
 }
