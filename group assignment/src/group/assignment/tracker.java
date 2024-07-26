@@ -36,11 +36,11 @@ public class tracker extends javax.swing.JFrame {
     Income i = new Income();
     Reports r = new Reports();
     Expenses ex = new Expenses();
+    Transfers t = new Transfers();
 
     public tracker() {
         initComponents();
         setLocationRelativeTo(null);
-        
 
     }
 
@@ -63,6 +63,7 @@ public class tracker extends javax.swing.JFrame {
         jFrame1 = new javax.swing.JFrame();
         jPanel3 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -78,6 +79,9 @@ public class tracker extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
+        transferButton = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -124,6 +128,17 @@ public class tracker extends javax.swing.JFrame {
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("FINANCE TRACKER");
         setResizable(false);
@@ -135,12 +150,12 @@ public class tracker extends javax.swing.JFrame {
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 450, 75, -1));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel2.setText("Expenses");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 490, 80, -1));
+        jLabel2.setText("Transfers");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 530, 80, -1));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel3.setText("Balance");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 530, 66, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 570, 90, -1));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel4.setText("WELCOME TO FINANCE TRACKER");
@@ -185,7 +200,7 @@ public class tracker extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 590, 150, 60));
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 640, 150, 60));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel6.setText("Rs. 0.00");
@@ -197,7 +212,7 @@ public class tracker extends javax.swing.JFrame {
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel8.setText("Rs. 0.00");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 530, -1, -1));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 570, -1, -1));
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 204));
         jPanel2.setLayout(new java.awt.BorderLayout());
@@ -206,14 +221,30 @@ public class tracker extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 0, 51));
         jLabel9.setText("Warning!!! Current income insufficient to cover expenses.");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 550, 380, 30));
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 610, 380, 30));
+
+        transferButton.setText("Transfer");
+        transferButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                transferButtonActionPerformed(evt);
+            }
+        });
+        jPanel1.add(transferButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 530, 210, 30));
+
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel11.setText("Expenses");
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 490, 80, -1));
+
+        jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel12.setText("Rs. 0.00");
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 530, -1, -1));
 
         jMenuBar1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         jMenu1.setText("File");
         jMenu1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMenuItem1.setText("Generate Report");
         jMenuItem1.setToolTipText("Generate Report");
@@ -224,7 +255,7 @@ public class tracker extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem1);
 
-        jMenuItem6.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem6.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMenuItem6.setText("Sign out");
         jMenuItem6.setToolTipText("Sign out");
@@ -251,7 +282,7 @@ public class tracker extends javax.swing.JFrame {
         jMenu2.setText("Edit");
         jMenu2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_I, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_I, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMenuItem3.setText("Incomes");
         jMenuItem3.setToolTipText("Incomes");
@@ -262,7 +293,7 @@ public class tracker extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem3);
 
-        jMenuItem4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMenuItem4.setText("Expences");
         jMenuItem4.setToolTipText("Expences");
@@ -278,7 +309,7 @@ public class tracker extends javax.swing.JFrame {
         jMenu3.setText("About");
         jMenu3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        jMenuItem5.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem5.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMenuItem5.setText("About us");
         jMenuItem5.setToolTipText("About us");
@@ -297,13 +328,11 @@ public class tracker extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 590, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 604, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 667, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 714, Short.MAX_VALUE)
         );
 
         pack();
@@ -333,8 +362,9 @@ public class tracker extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-
-                ex.setVisible(true);
+                Expenses expenseGUI = new Expenses(tracker.this, username);
+                expenseGUI.setVisible(true);
+                expenseGUI.setResizable(false);
             }
         });
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -342,23 +372,25 @@ public class tracker extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-
-                r.setVisible(true);
+                Reports r1 = new Reports(tracker.this, username);
+                r1.setVisible(true);
+                r1.setResizable(false);
             }
         });
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-         java.awt.EventQueue.invokeLater(new Runnable() {
+        java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-
-                r.setVisible(true);
+                Reports r1 = new Reports(tracker.this, username);
+                r1.setVisible(true);
+                r1.setResizable(false);
             }
         });
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-         java.awt.EventQueue.invokeLater(new Runnable() {
+        java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 Income incomeGUI = new Income(tracker.this, username);
                 incomeGUI.setVisible(true);
@@ -371,8 +403,9 @@ public class tracker extends javax.swing.JFrame {
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-
-                ex.setVisible(true);
+                Expenses expenseGUI = new Expenses(tracker.this, username);
+                expenseGUI.setVisible(true);
+                expenseGUI.setResizable(false);
             }
         });
     }//GEN-LAST:event_jMenuItem4ActionPerformed
@@ -388,8 +421,8 @@ public class tracker extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-       this.dispose();
-       System.exit(0);
+        this.dispose();
+        System.exit(0);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
@@ -398,50 +431,61 @@ public class tracker extends javax.swing.JFrame {
                 jFrame1.setSize(400, 350);
                 jFrame1.setVisible(true);
                 jFrame1.setLocationRelativeTo(null);
-             }
+            }
         });
     }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void transferButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transferButtonActionPerformed
+        // TODO add your handling code here:
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                Transfers tr = new Transfers(tracker.this, username);
+                tr.setVisible(true);
+                tr.setResizable(false);
+            }
+        });
+    }//GEN-LAST:event_transferButtonActionPerformed
 
     // Update balance label
     public void updateBalance() {
         // Get current user's total income from the database
         double totalIncome = getTotalIncomeForUser(username);
-        double totalExpenses=0;
-        double totalBalance= totalIncome-totalExpenses;
-        
+        double totalExpenses = getTotalExpenseForUser(username);
+        double totalTransfers = getTotalTransferForUser(username);
+        double totalBalance = totalIncome - totalExpenses - totalTransfers;
 
         // Update jLabel6 with the fetched total income
         jLabel6.setText("Rs. " + String.format("%.2f", totalIncome));
         jLabel7.setText("Rs. " + String.format("%.2f", totalExpenses));
+        jLabel12.setText("Rs. " + String.format("%.2f", totalTransfers));
         jLabel8.setText("Rs. " + String.format("%.2f", totalBalance));
-        
-        if(totalBalance<0)
-        {
+
+        if (totalBalance < 0) {
             jLabel8.setForeground(Color.RED);
             jLabel9.setVisible(true);
-        }
-        else{
+        } else {
             jLabel9.setVisible(false);
             jLabel8.setForeground(Color.BLACK);
         }
-        
+
         double absBalance = Math.abs(totalBalance);
         //show pie chart
         DefaultPieDataset pieDataset = new DefaultPieDataset();
         pieDataset.setValue("Incomes", Double.valueOf(totalIncome));
         pieDataset.setValue("Expences", Double.valueOf(totalExpenses));
+        pieDataset.setValue("Transfers", Double.valueOf(totalTransfers));
         pieDataset.setValue("Balance", Double.valueOf(absBalance));
         JFreeChart pieChart = ChartFactory.createPieChart3D("Finance Overview", pieDataset, true, true, false);
         pieChart.setBackgroundPaint(Color.WHITE);
         pieChart.setBorderVisible(false);
         pieChart.setAntiAlias(false);
-        final PiePlot3D plot = ( PiePlot3D ) pieChart.getPlot( );             
-        plot.setStartAngle( 270 );             
-        plot.setForegroundAlpha( 0.60f );                
+        final PiePlot3D plot = (PiePlot3D) pieChart.getPlot();
+        plot.setStartAngle(270);
+        plot.setForegroundAlpha(0.60f);
         Rotator rotator = new Rotator((PiePlot3D) pieChart.getPlot());
-        rotator.start();      
+        rotator.start();
         ChartPanel piePanel = new ChartPanel(pieChart);
-       
+
         jPanel2.removeAll();
         jPanel2.add(piePanel, BorderLayout.CENTER);
         jPanel2.validate();
@@ -485,6 +529,82 @@ public class tracker extends javax.swing.JFrame {
         return totalIncome;
     }
 
+    private double getTotalExpenseForUser(String username) {
+        double totalExpenses = 0.0;
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            con = DBconnection.getCon(); // Get database connection
+            String query = "SELECT SUM(amount) AS total_expense FROM expenses WHERE user_name = ?";
+            pstmt = con.prepareStatement(query);
+            pstmt.setString(1, username);
+            rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                totalExpenses = rs.getDouble("total_expense");
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            // Close resources
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+
+        return totalExpenses;
+    }
+
+    private double getTotalTransferForUser(String username) {
+        double totalTransfers = 0.0;
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            con = DBconnection.getCon(); // Get database connection
+            String query = "SELECT SUM(amount) AS total_transfer FROM transfers WHERE user_name = ?";
+            pstmt = con.prepareStatement(query);
+            pstmt.setString(1, username);
+            rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                totalTransfers = rs.getDouble("total_transfer");
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            // Close resources
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+
+        return totalTransfers;
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -497,6 +617,8 @@ public class tracker extends javax.swing.JFrame {
     private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -519,22 +641,27 @@ public class tracker extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JButton transferButton;
     // End of variables declaration//GEN-END:variables
 }
 
-
 class Rotator extends Timer implements ActionListener {
 
-    /** The plot. */
+    /**
+     * The plot.
+     */
     private PiePlot3D plot;
 
-    /** The angle. */
+    /**
+     * The angle.
+     */
     private int angle = 270;
 
     /**
      * Constructor.
      *
-     * @param plot  the plot.
+     * @param plot the plot.
      */
     Rotator(PiePlot3D plot) {
         super(100, null);
@@ -545,7 +672,7 @@ class Rotator extends Timer implements ActionListener {
     /**
      * Modifies the starting angle.
      *
-     * @param event  the action event.
+     * @param event the action event.
      */
     public void actionPerformed(ActionEvent event) {
         this.plot.setStartAngle(this.angle);
