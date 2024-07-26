@@ -27,3 +27,15 @@ CREATE TABLE expenses (
     notes VARCHAR(255),
     CONSTRAINT fk2 FOREIGN KEY (user_name) REFERENCES user_table(user_name)
 );
+
+CREATE TABLE transfers (
+    transfer_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    user_name CHAR(50) NOT NULL,
+    acc_number INT NOT NULL,
+    acc_name CHAR(70) NOT NULL,
+    bank_name VARCHAR(200) NOT NULL,
+    reference VARCHAR(500),
+    amount FLOAT(15, 2) NOT NULL CHECK (amount > 0),
+    `date` DATE,
+    CONSTRAINT fk3 FOREIGN KEY (user_name) REFERENCES user_table(user_name)
+);
