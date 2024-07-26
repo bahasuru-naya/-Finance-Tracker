@@ -9,6 +9,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 public class login extends javax.swing.JFrame {
 
@@ -23,6 +25,13 @@ public class login extends javax.swing.JFrame {
         initComponents();        
         setLocationRelativeTo(null);
         jPasswordField1.setEchoChar('\u2022');
+        try {
+            // Load the icon from the resources
+            ImageIcon icon = new ImageIcon("./src/pics/pic17.png");
+            setIconImage(icon.getImage());
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(this, "Icon image not found.");
+        }
     }
 
     /**

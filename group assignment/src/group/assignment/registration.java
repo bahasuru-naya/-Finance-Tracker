@@ -9,6 +9,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -24,6 +26,13 @@ public class registration extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         jPasswordField1.setEchoChar('\u2022');
         jPasswordField2.setEchoChar('\u2022');
+        try {
+            // Load the icon from the resources
+            ImageIcon icon = new ImageIcon("./src/pics/pic17.png");
+            setIconImage(icon.getImage());
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(this, "Icon image not found.");
+        }
     }
 
     /**
@@ -72,7 +81,7 @@ public class registration extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Register");
+        setTitle("Register New User");
         setResizable(false);
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pics/register page photo.png"))); // NOI18N

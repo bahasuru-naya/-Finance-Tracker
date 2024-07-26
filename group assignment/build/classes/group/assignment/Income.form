@@ -11,7 +11,7 @@
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
-    <Property name="title" type="java.lang.String" value="Income"/>
+    <Property name="title" type="java.lang.String" value="Income Management"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -492,7 +492,7 @@
                 </Component>
                 <Component class="com.toedter.calendar.JDateChooser" name="incomeDateChooser">
                   <Properties>
-                    <Property name="dateFormatString" type="java.lang.String" value="yyyy-MM-dd"/>
+                    <Property name="dateFormatString" type="java.lang.String" value="dd-MM-yyyy"/>
                     <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                       <Dimension value="[214748364, 214748364]"/>
                     </Property>

@@ -17,6 +17,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Date;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -42,6 +43,13 @@ public class Reports extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         this.trackerRef = trackerRef;
         this.username = username; // Assign username passed from tracker class
+        try {
+            // Load the icon from the resources
+            ImageIcon icon = new ImageIcon("./src/pics/pic17.png");
+            setIconImage(icon.getImage());
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(this, "Icon image not found.");
+        }
     }
 
     /**

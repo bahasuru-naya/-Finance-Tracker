@@ -33,7 +33,13 @@ public class Expenses extends javax.swing.JFrame {
         loadCategories(); // Load categories from the database
         setNewCategoryVisibility(false); // Initially hide new category adding items
         loadDataFromDatabase(); // Load data into the table from the database
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        try {
+            // Load the icon from the resources
+            ImageIcon icon = new ImageIcon("./src/pics/pic17.png");
+            setIconImage(icon.getImage());
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(this, "Icon image not found.");
+        }
     }
 
     private void loadDataFromDatabase() {
@@ -119,7 +125,7 @@ public class Expenses extends javax.swing.JFrame {
         jRadioButtonMenuItem1.setText("jRadioButtonMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Income");
+        setTitle("Expense Management");
 
         jPanel6.setBackground(new java.awt.Color(165, 208, 255));
 
@@ -590,7 +596,7 @@ public class Expenses extends javax.swing.JFrame {
     }//GEN-LAST:event_editButtonActionPerformed
 
     private boolean isEditMode = false;
-    private int editExpensesID = -1; // To store the ID of the income being edited
+    private int editExpensesID = -1; // To store the ID of the expense being edited
 
     /**
      * @param args the command line arguments

@@ -84,7 +84,7 @@ public class Income extends javax.swing.JFrame {
         jRadioButtonMenuItem1.setText("jRadioButtonMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Income");
+        setTitle("Income Management");
 
         jPanel6.setBackground(new java.awt.Color(165, 208, 255));
 
@@ -240,7 +240,7 @@ public class Income extends javax.swing.JFrame {
         dateLabel.setForeground(new java.awt.Color(0, 0, 0));
         dateLabel.setText("Date :");
 
-        incomeDateChooser.setDateFormatString("yyyy-MM-dd");
+        incomeDateChooser.setDateFormatString("dd-MM-yyyy");
         incomeDateChooser.setMaximumSize(new java.awt.Dimension(214748364, 214748364));
         incomeDateChooser.setPreferredSize(new java.awt.Dimension(86, 20));
 
