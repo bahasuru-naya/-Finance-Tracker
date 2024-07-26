@@ -126,6 +126,7 @@ public class Expenses extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Expense Management");
+        setResizable(false);
 
         jPanel6.setBackground(new java.awt.Color(165, 208, 255));
 

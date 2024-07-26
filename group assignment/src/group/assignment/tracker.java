@@ -247,7 +247,7 @@ public class tracker extends javax.swing.JFrame {
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
                 .addComponent(jButton4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(32, 32, 32)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(42, 42, 42)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -390,7 +390,7 @@ public class tracker extends javax.swing.JFrame {
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addGap(42, 42, 42)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(42, 42, 42)
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -579,10 +579,9 @@ public class tracker extends javax.swing.JFrame {
             public void run() {
                 Income incomeGUI = new Income(tracker.this, username);
                 incomeGUI.setVisible(true);
-                //incomeGUI.setSize(1120,650);
-                incomeGUI.setResizable(false);
             }
         });
+ 
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -600,7 +599,6 @@ public class tracker extends javax.swing.JFrame {
             public void run() {
                 Expenses expenseGUI = new Expenses(tracker.this, username);
                 expenseGUI.setVisible(true);
-                expenseGUI.setResizable(false);
             }
         });
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -610,7 +608,6 @@ public class tracker extends javax.swing.JFrame {
             public void run() {
                 Reports r1 = new Reports(tracker.this, username);
                 r1.setVisible(true);
-                r1.setResizable(false);
             }
         });
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -620,7 +617,6 @@ public class tracker extends javax.swing.JFrame {
             public void run() {
                 Reports r1 = new Reports(tracker.this, username);
                 r1.setVisible(true);
-                r1.setResizable(false);
             }
         });
     }//GEN-LAST:event_jMenuItem1ActionPerformed
@@ -630,8 +626,6 @@ public class tracker extends javax.swing.JFrame {
             public void run() {
                 Income incomeGUI = new Income(tracker.this, username);
                 incomeGUI.setVisible(true);
-                //incomeGUI.setSize(1120,650);
-                incomeGUI.setResizable(false);
             }
         });
     }//GEN-LAST:event_jMenuItem3ActionPerformed
@@ -641,7 +635,6 @@ public class tracker extends javax.swing.JFrame {
             public void run() {
                 Expenses expenseGUI = new Expenses(tracker.this, username);
                 expenseGUI.setVisible(true);
-                expenseGUI.setResizable(false);
             }
         });
     }//GEN-LAST:event_jMenuItem4ActionPerformed
@@ -677,7 +670,6 @@ public class tracker extends javax.swing.JFrame {
             public void run() {
                 Transfers tr = new Transfers(tracker.this, username);
                 tr.setVisible(true);
-                tr.setResizable(false);
             }
         });
     }//GEN-LAST:event_transferButtonActionPerformed
@@ -688,7 +680,6 @@ public class tracker extends javax.swing.JFrame {
             public void run() {
                 Transfers tr = new Transfers(tracker.this, username);
                 tr.setVisible(true);
-                tr.setResizable(false);
             }
         });
     }//GEN-LAST:event_jMenuItem7ActionPerformed
@@ -699,7 +690,7 @@ public class tracker extends javax.swing.JFrame {
         double totalIncome = getTotalIncomeForUser(username);
         double totalExpenses = getTotalExpenseForUser(username);
         double totalTransfers = getTotalTransferForUser(username);
-        double totalBalance = totalIncome - totalExpenses - totalTransfers;
+        double totalBalance = totalIncome - (totalExpenses + totalTransfers);
 
         // Update jLabel6 with the fetched total income
         jLabel6.setText("Rs. " + String.format("%.2f", totalIncome));

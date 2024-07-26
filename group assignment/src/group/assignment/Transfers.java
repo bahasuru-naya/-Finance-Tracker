@@ -129,6 +129,7 @@ public class Transfers extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Transfer Management");
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(165, 208, 255));
 
