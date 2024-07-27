@@ -710,7 +710,7 @@ public class Reports extends javax.swing.JFrame {
     }
 
     private ResultSet getIncomes(String userName, Date startDate, Date endDate) throws Exception {
-        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/finance_tracker?zeroDateTimeBehavior=convertToNull", "root", "");
+        Connection conn = DBconnection.getCon();
         String query = "SELECT * FROM incomes WHERE user_name = ? AND date BETWEEN ? AND ?";
         PreparedStatement stmt = conn.prepareStatement(query);
         stmt.setString(1, userName);
@@ -720,7 +720,7 @@ public class Reports extends javax.swing.JFrame {
     }
 
     private ResultSet getExpenses(String userName, Date startDate, Date endDate) throws Exception {
-        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/finance_tracker?zeroDateTimeBehavior=convertToNull", "root", "");
+        Connection conn = DBconnection.getCon();
         String query = "SELECT * FROM expenses WHERE user_name = ? AND date BETWEEN ? AND ?";
         PreparedStatement stmt = conn.prepareStatement(query);
         stmt.setString(1, userName);
