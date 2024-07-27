@@ -3,22 +3,24 @@ package group.assignment;
 import java.io.File;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
-import java.io.FileOutputStream;
-import java.sql.ResultSet;
-
-import org.apache.poi.ss.usermodel.*;
+import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.*;
+import java.io.ByteArrayOutputStream;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.common.PDRectangle;
+import org.apache.pdfbox.pdmodel.font.PDType1Font;
 
-import javax.swing.JOptionPane;
+import javax.swing.*;
 import java.io.FileOutputStream;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Date;
-import javax.swing.ImageIcon;
-import javax.swing.JFileChooser;
+import java.sql.*;
+import java.text.SimpleDateFormat;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
@@ -61,18 +63,14 @@ public class Reports extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         dateLabel = new javax.swing.JLabel();
-        fromMonthComboBox = new javax.swing.JComboBox<>();
-        fromDateComboBox = new javax.swing.JComboBox<>();
-        fromYearComboBox = new javax.swing.JComboBox<>();
+        fromDateChooser = new com.toedter.calendar.JDateChooser();
         jPanel6 = new javax.swing.JPanel();
         dateLabel1 = new javax.swing.JLabel();
-        toMonthComboBox = new javax.swing.JComboBox<>();
-        toDateComboBox = new javax.swing.JComboBox<>();
-        toYearComboBox = new javax.swing.JComboBox<>();
+        toDateChooser = new com.toedter.calendar.JDateChooser();
         jPanel7 = new javax.swing.JPanel();
         typeLabel = new javax.swing.JLabel();
         reportTypeComboBox = new javax.swing.JComboBox<>();
@@ -81,48 +79,28 @@ public class Reports extends javax.swing.JFrame {
         textField1 = new java.awt.TextField();
         input = new java.awt.TextField();
         jButton1 = new javax.swing.JButton();
+        jPanel8 = new javax.swing.JPanel();
+        typeLabel1 = new javax.swing.JLabel();
+        fileTypeComboBox = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Reports");
         setResizable(false);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Reports");
+        jPanel2.setBackground(new java.awt.Color(165, 208, 255));
+
+        jPanel1.setBackground(new java.awt.Color(225, 241, 253));
 
         jPanel5.setBackground(new java.awt.Color(0, 153, 153));
 
         dateLabel.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         dateLabel.setText("From :");
 
-        fromMonthComboBox.setMaximumRowCount(12);
-        fromMonthComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Month", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
-        fromMonthComboBox.setToolTipText("");
-        fromMonthComboBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fromMonthComboBoxActionPerformed(evt);
-            }
-        });
-
-        fromDateComboBox.setMaximumRowCount(12);
-        fromDateComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Date", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
-        fromDateComboBox.setToolTipText("");
-        fromDateComboBox.setName(""); // NOI18N
-        fromDateComboBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fromDateComboBoxActionPerformed(evt);
-            }
-        });
-
-        fromYearComboBox.setMaximumRowCount(12);
-        fromYearComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2024", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030", "2031", "2032", "2033", "2034", "2035", "2036", "2037", "2038", "2039", "2040", "2041", "2042", "2043", "2044", "2045", "2046", "2047", "2048", "2049", "2050", "2051", "2052", "2053", "2054", "2055", "2056", "2057", "2058", "2059", "2060", "2061", "2062", "2063", "2064", "2065", "2066", "2067", "2068", "2069", "2070", "2071", "2072", "2073", "2074", "2075", "2076", "2077", "2078", "2079", "2080", "2081", "2082", "2083", "2084", "2085", "2086", "2087", "2088", "2089", "2090", "2091", "2092", "2093", "2094", "2095", "2096", "2097", "2098", "2099", "2100" }));
-        fromYearComboBox.setToolTipText("");
-        fromYearComboBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fromYearComboBoxActionPerformed(evt);
-            }
-        });
+        fromDateChooser.setDateFormatString("yyyy-MM-dd");
+        fromDateChooser.setMaximumSize(new java.awt.Dimension(214748364, 214748364));
+        fromDateChooser.setPreferredSize(new java.awt.Dimension(87, 20));
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -131,24 +109,15 @@ public class Reports extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(0, 0, 0)
                 .addComponent(dateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25)
-                .addComponent(fromYearComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22)
-                .addComponent(fromMonthComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22)
-                .addComponent(fromDateComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
+                .addComponent(fromDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(dateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(fromMonthComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(fromDateComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(fromYearComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(fromDateChooser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(dateLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(1, 1, 1))
         );
 
@@ -157,33 +126,9 @@ public class Reports extends javax.swing.JFrame {
         dateLabel1.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         dateLabel1.setText("To :");
 
-        toMonthComboBox.setMaximumRowCount(12);
-        toMonthComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Month", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
-        toMonthComboBox.setToolTipText("");
-        toMonthComboBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                toMonthComboBoxActionPerformed(evt);
-            }
-        });
-
-        toDateComboBox.setMaximumRowCount(12);
-        toDateComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Date", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
-        toDateComboBox.setToolTipText("");
-        toDateComboBox.setName(""); // NOI18N
-        toDateComboBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                toDateComboBoxActionPerformed(evt);
-            }
-        });
-
-        toYearComboBox.setMaximumRowCount(12);
-        toYearComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2024", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030", "2031", "2032", "2033", "2034", "2035", "2036", "2037", "2038", "2039", "2040", "2041", "2042", "2043", "2044", "2045", "2046", "2047", "2048", "2049", "2050", "2051", "2052", "2053", "2054", "2055", "2056", "2057", "2058", "2059", "2060", "2061", "2062", "2063", "2064", "2065", "2066", "2067", "2068", "2069", "2070", "2071", "2072", "2073", "2074", "2075", "2076", "2077", "2078", "2079", "2080", "2081", "2082", "2083", "2084", "2085", "2086", "2087", "2088", "2089", "2090", "2091", "2092", "2093", "2094", "2095", "2096", "2097", "2098", "2099", "2100" }));
-        toYearComboBox.setToolTipText("");
-        toYearComboBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                toYearComboBoxActionPerformed(evt);
-            }
-        });
+        toDateChooser.setDateFormatString("yyyy-MM-dd");
+        toDateChooser.setMaximumSize(new java.awt.Dimension(214748364, 214748364));
+        toDateChooser.setPreferredSize(new java.awt.Dimension(87, 20));
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -192,25 +137,20 @@ public class Reports extends javax.swing.JFrame {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGap(0, 0, 0)
                 .addComponent(dateLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25)
-                .addComponent(toYearComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22)
-                .addComponent(toMonthComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22)
-                .addComponent(toDateComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
+                .addComponent(toDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGap(0, 0, 0)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(dateLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(toMonthComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(toDateComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(toYearComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(1, 1, 1))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addComponent(toDateChooser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(0, 0, 0))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addComponent(dateLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(1, 1, 1))))
         );
 
         jPanel7.setBackground(new java.awt.Color(0, 153, 153));
@@ -280,30 +220,69 @@ public class Reports extends javax.swing.JFrame {
 
         jButton1.setBackground(new java.awt.Color(151, 115, 115));
         jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jPanel8.setBackground(new java.awt.Color(0, 153, 153));
+
+        typeLabel1.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        typeLabel1.setText("File Type");
+
+        fileTypeComboBox.setMaximumRowCount(12);
+        fileTypeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Excel", "PDF" }));
+        fileTypeComboBox.setToolTipText("");
+        fileTypeComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fileTypeComboBoxActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addComponent(typeLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(fileTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(158, 158, 158))
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(fileTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(typeLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(1, 1, 1))
+        );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(0, 207, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jPanel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 337, Short.MAX_VALUE)
-                        .addComponent(panel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(138, 138, 138)
-                        .addComponent(jButton1)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(165, 165, 165))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addGap(312, 312, 312))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(24, 24, 24)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -311,82 +290,162 @@ public class Reports extends javax.swing.JFrame {
                 .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(68, 68, 68)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 165, Short.MAX_VALUE)
                 .addComponent(jButton1)
-                .addContainerGap(80, Short.MAX_VALUE))
+                .addGap(158, 158, 158))
         );
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pics/2.png"))); // NOI18N
         jLabel2.setText("jLabel2");
 
+        jLabel1.setBackground(new java.awt.Color(40, 40, 230));
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(40, 40, 230));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Reports");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 155, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(394, 394, 394))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(jLabel1)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(48, 48, 48)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20))))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void fromMonthComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fromMonthComboBoxActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_fromMonthComboBoxActionPerformed
-
-    private void fromDateComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fromDateComboBoxActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_fromDateComboBoxActionPerformed
-
-    private void fromYearComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fromYearComboBoxActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_fromYearComboBoxActionPerformed
-
-    private void toMonthComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toMonthComboBoxActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_toMonthComboBoxActionPerformed
-
-    private void toDateComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toDateComboBoxActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_toDateComboBoxActionPerformed
-
-    private void toYearComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toYearComboBoxActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_toYearComboBoxActionPerformed
 
     private void reportTypeComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reportTypeComboBoxActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_reportTypeComboBoxActionPerformed
 
     private void inputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputActionPerformed
-        String reportName = JOptionPane.showInputDialog("Enter report name:");
-        if (reportName == null || reportName.trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Please enter a report name.");
-            return;
-        }
-        String title = reportName;
-        generateReport(title);
+
     }//GEN-LAST:event_inputActionPerformed
 
-    private void generateReport(String reportName) {
-    // Logic to generate the report with the given name
-    // For example:
-    System.out.println("Generating report with name: " + reportName);
-    // Additional code to generate and save the report
-}
-    //method for create Excel file
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // Validate inputs
+        if (fromDateChooser.getDate() == null || toDateChooser.getDate() == null) {
+            JOptionPane.showMessageDialog(this, "Please select both From and To dates.");
+            return;
+        }
+
+        // Validate report type
+        if (reportTypeComboBox.getSelectedItem() == null || reportTypeComboBox.getSelectedItem().toString().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please select a report type.");
+            return;
+        }
+
+        // Validate report name
+        if (input.getText().trim().isEmpty()) {
+            String reportName = JOptionPane.showInputDialog(this, "Enter report name:");
+            if (reportName == null || reportName.trim().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Please enter a report name.");
+                return;
+            }
+            input.setText(reportName);
+        }
+
+        // Validate file type
+        if (fileTypeComboBox.getSelectedItem() == null || fileTypeComboBox.getSelectedItem().toString().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please select a file type.");
+            return;
+        }
+
+        try {
+            // Get selected dates
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            String fromDateStr = dateFormat.format(fromDateChooser.getDate());
+            String toDateStr = dateFormat.format(toDateChooser.getDate());
+
+            Date fromDate = Date.valueOf(fromDateStr);
+            Date toDate = Date.valueOf(toDateStr);
+
+            // Get selected report type
+            String reportType = (String) reportTypeComboBox.getSelectedItem();
+
+            // Get selected file type
+            String fileType = (String) fileTypeComboBox.getSelectedItem();
+
+            ResultSet incomes = null;
+            ResultSet expenses = null;
+
+            if (reportType.equalsIgnoreCase("Incomes") || reportType.equalsIgnoreCase("Incomes & Expenses")) {
+                incomes = getIncomes(username, fromDate, toDate);
+            }
+
+            if (reportType.equalsIgnoreCase("Expenses") || reportType.equalsIgnoreCase("Incomes & Expenses")) {
+                expenses = getExpenses(username, fromDate, toDate);
+            }
+
+            String reportName = input.getText().trim();
+
+            // Generate report based on selected report type and file type
+            if (fileType.equalsIgnoreCase("Excel")) {
+                if (reportType.equalsIgnoreCase("Incomes")) {
+                    createExcelIncomes(reportName + ".xlsx", incomes);
+                } else if (reportType.equalsIgnoreCase("Expenses")) {
+                    createExcelExpenses(reportName + ".xlsx", expenses);
+                } else if (reportType.equalsIgnoreCase("Incomes & Expenses")) {
+                    createExcelBoth(reportName + ".xlsx", incomes, expenses);
+                }
+            } else if (fileType.equalsIgnoreCase("PDF")) {
+                if (reportType.equalsIgnoreCase("Incomes")) {
+                    createPdfIncomes(reportName + ".pdf", incomes);
+                } else if (reportType.equalsIgnoreCase("Expenses")) {
+                    createPdfExpenses(reportName + ".pdf", expenses);
+                } else if (reportType.equalsIgnoreCase("Incomes & Expenses")) {
+                    createPdfBoth(reportName + ".pdf", incomes, expenses);
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error generating report: " + e.getMessage());
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void fileTypeComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fileTypeComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fileTypeComboBoxActionPerformed
+
+    // Method for creating Excel file with both incomes and expenses
     private void createExcelBoth(String fileName, ResultSet incomes, ResultSet expenses) throws Exception {
         Workbook workbook = new XSSFWorkbook();
         Sheet sheet = workbook.createSheet("Finance Tracker Report");
@@ -413,7 +472,7 @@ public class Reports extends javax.swing.JFrame {
             row.createCell(4).setCellValue(incomes.getString("notes"));
         }
 
-        rowNum = rowNum + 2;
+        rowNum += 2;
 
         // Add expenses table
         headerRow = sheet.createRow(rowNum++);
@@ -428,35 +487,17 @@ public class Reports extends javax.swing.JFrame {
 
         while (expenses.next()) {
             Row row = sheet.createRow(rowNum++);
-            row.createCell(0).setCellValue(expenses.getInt("expenses_id"));
+            row.createCell(0).setCellValue(expenses.getInt("expense_id"));
             row.createCell(1).setCellValue(expenses.getString("category"));
             row.createCell(2).setCellValue(expenses.getFloat("amount"));
             row.createCell(3).setCellValue(expenses.getDate("date").toString());
             row.createCell(4).setCellValue(expenses.getString("notes"));
         }
-
-        //Saving created excel file in PC
-        // Create a file chooser to select the save location
-JFileChooser fileChooser = new JFileChooser();
-fileChooser.setDialogTitle("Select Save Location");
-fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-FileNameExtensionFilter filter = new FileNameExtensionFilter("Excel Files", "xlsx");
-fileChooser.setFileFilter(filter);
-
-int returnValue = fileChooser.showSaveDialog(null);
-if (returnValue == JFileChooser.APPROVE_OPTION) {
-    File selectedFile = fileChooser.getSelectedFile();
-    String filePath = selectedFile.getAbsolutePath() + "/" + fileName;
-    FileOutputStream fileOut = new FileOutputStream(filePath);
-    workbook.write(fileOut);
-    fileOut.close();
-    workbook.close();
-} else {
-    // User cancelled, do nothing
-}
+        // Saving created excel file in PC
+        saveExcelFile(fileName, workbook);
     }
-    
-    //method for create Excel file only incomes
+
+    // Method for creating Excel file with only incomes
     private void createExcelIncomes(String fileName, ResultSet incomes) throws Exception {
         Workbook workbook = new XSSFWorkbook();
         Sheet sheet = workbook.createSheet("Finance Tracker Report");
@@ -483,28 +524,11 @@ if (returnValue == JFileChooser.APPROVE_OPTION) {
             row.createCell(4).setCellValue(incomes.getString("notes"));
         }
 
-        //Saving created excel file in PC
-        // Create a file chooser to select the save location
-JFileChooser fileChooser = new JFileChooser();
-fileChooser.setDialogTitle("Select Save Location");
-fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-FileNameExtensionFilter filter = new FileNameExtensionFilter("Excel Files", "xlsx");
-fileChooser.setFileFilter(filter);
-
-int returnValue = fileChooser.showSaveDialog(null);
-if (returnValue == JFileChooser.APPROVE_OPTION) {
-    File selectedFile = fileChooser.getSelectedFile();
-    String filePath = selectedFile.getAbsolutePath() + "/" + fileName;
-    FileOutputStream fileOut = new FileOutputStream(filePath);
-    workbook.write(fileOut);
-    fileOut.close();
-    workbook.close();
-} else {
-    // User cancelled, do nothing
-}
+        // Saving created excel file in PC
+        saveExcelFile(fileName, workbook);
     }
-    
-    //method for create Excel file only expenses
+
+    // Method for creating Excel file with only expenses
     private void createExcelExpenses(String fileName, ResultSet expenses) throws Exception {
         Workbook workbook = new XSSFWorkbook();
         Sheet sheet = workbook.createSheet("Finance Tracker Report");
@@ -524,32 +548,166 @@ if (returnValue == JFileChooser.APPROVE_OPTION) {
 
         while (expenses.next()) {
             Row row = sheet.createRow(rowNum++);
-            row.createCell(0).setCellValue(expenses.getInt("expenses_id"));
+            row.createCell(0).setCellValue(expenses.getInt("expense_id"));
             row.createCell(1).setCellValue(expenses.getString("category"));
             row.createCell(2).setCellValue(expenses.getFloat("amount"));
             row.createCell(3).setCellValue(expenses.getDate("date").toString());
             row.createCell(4).setCellValue(expenses.getString("notes"));
         }
 
-        //Saving created excel file in PC
-        // Create a file chooser to select the save location
-JFileChooser fileChooser = new JFileChooser();
-fileChooser.setDialogTitle("Select Save Location");
-fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-FileNameExtensionFilter filter = new FileNameExtensionFilter("Excel Files", "xlsx");
-fileChooser.setFileFilter(filter);
+        // Saving created excel file in PC
+        saveExcelFile(fileName, workbook);
+    }
 
-int returnValue = fileChooser.showSaveDialog(null);
-if (returnValue == JFileChooser.APPROVE_OPTION) {
-    File selectedFile = fileChooser.getSelectedFile();
-    String filePath = selectedFile.getAbsolutePath() + "/" + fileName;
-    FileOutputStream fileOut = new FileOutputStream(filePath);
-    workbook.write(fileOut);
-    fileOut.close();
-    workbook.close();
-} else {
-    // User cancelled, do nothing
-}
+    // Method for saving Ecxel file
+    private void saveExcelFile(String fileName, Workbook workbook) throws Exception {
+        // Create a file chooser to select the save location
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Select Save Location");
+        fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Excel Files", "xlsx");
+        fileChooser.setFileFilter(filter);
+
+        int returnValue = fileChooser.showSaveDialog(null);
+        if (returnValue == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fileChooser.getSelectedFile();
+            String filePath = selectedFile.getAbsolutePath() + "/" + fileName;
+            FileOutputStream fileOut = new FileOutputStream(filePath);
+            workbook.write(fileOut);
+            fileOut.close();
+            workbook.close();
+            JOptionPane.showMessageDialog(this, "Report saved successfully at: " + filePath);
+        } else {
+            // User cancelled, do nothing
+        }
+    }
+
+    // Method for creating PDF file with incomes
+    private void createPdfIncomes(String fileName, ResultSet incomes) throws Exception {
+        Document document = new Document();
+        PdfWriter.getInstance(document, new FileOutputStream(fileName));
+        document.open();
+
+        document.add(new Paragraph("Incomes Report"));
+        document.add(new Paragraph(" "));
+
+        PdfPTable table = new PdfPTable(5);
+        table.addCell("ID");
+        table.addCell("Category");
+        table.addCell("Amount");
+        table.addCell("Date");
+        table.addCell("Notes");
+
+        while (incomes.next()) {
+            table.addCell(String.valueOf(incomes.getInt("income_id")));
+            table.addCell(incomes.getString("category"));
+            table.addCell(String.valueOf(incomes.getFloat("amount")));
+            table.addCell(incomes.getDate("date").toString());
+            table.addCell(incomes.getString("notes"));
+        }
+
+        document.add(table);
+        document.close();
+        savePdfFile(fileName, document);  // Save the PDF file
+    }
+
+    // Method for creating PDF file with expenses
+    private void createPdfExpenses(String fileName, ResultSet expenses) throws Exception {
+        Document document = new Document();
+        PdfWriter.getInstance(document, new FileOutputStream(fileName));
+        document.open();
+
+        document.add(new Paragraph("Expenses Report"));
+        document.add(new Paragraph(" "));
+
+        PdfPTable table = new PdfPTable(5);
+        table.addCell("ID");
+        table.addCell("Category");
+        table.addCell("Amount");
+        table.addCell("Date");
+        table.addCell("Notes");
+
+        while (expenses.next()) {
+            table.addCell(String.valueOf(expenses.getInt("expense_id")));
+            table.addCell(expenses.getString("category"));
+            table.addCell(String.valueOf(expenses.getFloat("amount")));
+            table.addCell(expenses.getDate("date").toString());
+            table.addCell(expenses.getString("notes"));
+        }
+
+        document.add(table);
+        document.close();
+        savePdfFile(fileName, document);  // Save the PDF file
+    }
+
+// Method for creating PDF file with both incomes and expenses
+    private void createPdfBoth(String fileName, ResultSet incomes, ResultSet expenses) throws Exception {
+        Document document = new Document();
+        PdfWriter.getInstance(document, new FileOutputStream(fileName));
+        document.open();
+
+        document.add(new Paragraph("Incomes and Expenses Report"));
+        document.add(new Paragraph(" "));
+
+        document.add(new Paragraph("Incomes:"));
+        PdfPTable table = new PdfPTable(5);
+        table.addCell("ID");
+        table.addCell("Category");
+        table.addCell("Amount");
+        table.addCell("Date");
+        table.addCell("Notes");
+
+        while (incomes.next()) {
+            table.addCell(String.valueOf(incomes.getInt("income_id")));
+            table.addCell(incomes.getString("category"));
+            table.addCell(String.valueOf(incomes.getFloat("amount")));
+            table.addCell(incomes.getDate("date").toString());
+            table.addCell(incomes.getString("notes"));
+        }
+
+        document.add(table);
+        document.add(new Paragraph(" "));
+
+        document.add(new Paragraph("Expenses:"));
+        table = new PdfPTable(5);
+        table.addCell("ID");
+        table.addCell("Category");
+        table.addCell("Amount");
+        table.addCell("Date");
+        table.addCell("Notes");
+
+        while (expenses.next()) {
+            table.addCell(String.valueOf(expenses.getInt("expense_id")));
+            table.addCell(expenses.getString("category"));
+            table.addCell(String.valueOf(expenses.getFloat("amount")));
+            table.addCell(expenses.getDate("date").toString());
+            table.addCell(expenses.getString("notes"));
+        }
+
+        document.add(table);
+        document.close();
+        savePdfFile(fileName, document);  // Save the PDF file
+    }
+
+    private void savePdfFile(String fileName, Document document) throws Exception {
+        // Create a file chooser to select the save location
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Select Save Location");
+        fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+
+        int returnValue = fileChooser.showSaveDialog(null);
+        if (returnValue == JFileChooser.APPROVE_OPTION) {
+            File selectedDir = fileChooser.getSelectedFile();
+            String filePath = selectedDir.getAbsolutePath() + File.separator + fileName;
+
+            // Create PdfWriter instance before closing the document
+            PdfWriter.getInstance(document, new FileOutputStream(filePath));
+            // Document should be opened before closing it
+
+            JOptionPane.showMessageDialog(this, "PDF Report saved successfully at: " + filePath);
+        } else {
+            // User cancelled, do nothing
+        }
     }
 
     private ResultSet getIncomes(String userName, Date startDate, Date endDate) throws Exception {
@@ -579,24 +737,24 @@ if (returnValue == JFileChooser.APPROVE_OPTION) {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel dateLabel;
     private javax.swing.JLabel dateLabel1;
-    private javax.swing.JComboBox<String> fromDateComboBox;
-    private javax.swing.JComboBox<String> fromMonthComboBox;
-    private javax.swing.JComboBox<String> fromYearComboBox;
+    private javax.swing.JComboBox<String> fileTypeComboBox;
+    private com.toedter.calendar.JDateChooser fromDateChooser;
     private java.awt.TextField input;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
     private java.awt.Panel panel1;
     private javax.swing.JComboBox<String> reportTypeComboBox;
     private java.awt.TextField textField1;
-    private javax.swing.JComboBox<String> toDateComboBox;
-    private javax.swing.JComboBox<String> toMonthComboBox;
-    private javax.swing.JComboBox<String> toYearComboBox;
+    private com.toedter.calendar.JDateChooser toDateChooser;
     private javax.swing.JLabel typeLabel;
+    private javax.swing.JLabel typeLabel1;
     // End of variables declaration//GEN-END:variables
 }
