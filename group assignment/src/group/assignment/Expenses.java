@@ -52,7 +52,7 @@ public class Expenses extends javax.swing.JFrame {
             pst.setString(1, username); // Assuming you have the username stored in a variable
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
-                int id = rs.getInt("expense_id");
+                int id = rs.getInt("expenses_id");
                 float amount = rs.getFloat("amount");
                 String category = rs.getString("category");
                 String date = rs.getString("date");
@@ -572,6 +572,7 @@ public class Expenses extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Please select a row to edit.");
             return;
         }
+<<<<<<< Updated upstream
 
         // Retrieve data from the selected row
         editExpensesID = (int) expenseTable.getValueAt(selectedRow, 0);
@@ -589,6 +590,24 @@ public class Expenses extends javax.swing.JFrame {
             expenseDateChooser.setDate(dateFormat.parse(date));
         } catch (ParseException ex) {
             JOptionPane.showMessageDialog(this, "Error parsing date: " + ex.getMessage());
+=======
+        int ExpenseID = (int) jTable1.getValueAt(selectedRow, 0); // Assuming the first column is the ID
+        int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete this expense entry?", "Confirm Deletion", JOptionPane.YES_NO_OPTION);
+        if (confirm == JOptionPane.YES_OPTION) {
+            try {
+                Connection con = getCon();
+                String query = "DELETE FROM expenses WHERE expenses_id = ?";
+                PreparedStatement pst = con.prepareStatement(query);
+                pst.setInt(1, ExpenseID);
+                pst.executeUpdate();
+                JOptionPane.showMessageDialog(this, "Expense entry deleted successfully.");
+                // Update the table
+                loadDataFromDatabase();
+                trackerRef.updateBalance();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(this, "Error deleting expense: " + ex.getMessage());
+            }
+>>>>>>> Stashed changes
         }
         notesTextArea.setText(notes);
 
