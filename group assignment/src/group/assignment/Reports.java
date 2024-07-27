@@ -156,11 +156,11 @@ public class Reports extends javax.swing.JFrame {
 
         typeLabel.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         typeLabel.setForeground(new java.awt.Color(0, 0, 0));
-        typeLabel.setText("Incomes / Expenses :");
+        typeLabel.setText("Report Type :");
 
         reportTypeComboBox.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         reportTypeComboBox.setMaximumRowCount(12);
-        reportTypeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Incomes & Expenses", "Incomes", "Expenses" }));
+        reportTypeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Incomes & Expenses", "Incomes", "Expenses", " ", " " }));
         reportTypeComboBox.setToolTipText("");
         reportTypeComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
