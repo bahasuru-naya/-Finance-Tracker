@@ -19,7 +19,7 @@ CREATE TABLE incomes (
 );
 
 CREATE TABLE expenses (
-    expense_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    expenses_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     user_name CHAR(50) NOT NULL,
     amount FLOAT(15, 2) NOT NULL CHECK (amount > 0),
     category CHAR(50) NOT NULL,

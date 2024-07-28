@@ -580,8 +580,8 @@ public class Reports extends javax.swing.JFrame {
             // User cancelled, do nothing
         }
     }
+// Method for creating PDF file with incomes
 
-    // Method for creating PDF file with incomes
     private void createPdfIncomes(String fileName, ResultSet incomes) throws Exception {
         Document document = new Document();
         PdfWriter.getInstance(document, new FileOutputStream(fileName));
@@ -608,7 +608,7 @@ public class Reports extends javax.swing.JFrame {
 
         document.add(table);
         document.close();
-        
+
     }
 
     // Method for creating PDF file with expenses
@@ -638,7 +638,7 @@ public class Reports extends javax.swing.JFrame {
 
         document.add(table);
         document.close();
-        
+
     }
 
 // Method for creating PDF file with both incomes and expenses
@@ -688,7 +688,7 @@ public class Reports extends javax.swing.JFrame {
 
         document.add(table);
         document.close();
-        
+
     }
 
     private void savePdfFile(String fileName, Document document) throws Exception {
@@ -713,7 +713,7 @@ public class Reports extends javax.swing.JFrame {
     }
 
     private ResultSet getIncomes(String userName, Date startDate, Date endDate) throws Exception {
-        Connection conn = DBconnection.getCon();
+        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/finance_tracker?zeroDateTimeBehavior=convertToNull", "root", "");
         String query = "SELECT * FROM incomes WHERE user_name = ? AND date BETWEEN ? AND ?";
         PreparedStatement stmt = conn.prepareStatement(query);
         stmt.setString(1, userName);
@@ -723,7 +723,7 @@ public class Reports extends javax.swing.JFrame {
     }
 
     private ResultSet getExpenses(String userName, Date startDate, Date endDate) throws Exception {
-        Connection conn = DBconnection.getCon();
+        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/finance_tracker?zeroDateTimeBehavior=convertToNull", "root", "");
         String query = "SELECT * FROM expenses WHERE user_name = ? AND date BETWEEN ? AND ?";
         PreparedStatement stmt = conn.prepareStatement(query);
         stmt.setString(1, userName);
