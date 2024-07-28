@@ -148,7 +148,7 @@ public class tracker extends javax.swing.JFrame {
 
         jLabel16.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel16.setText("S Dharmasiri");
+        jLabel16.setText("H D S J Dharmasiri");
 
         jLabel15.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(0, 0, 0));
@@ -160,7 +160,7 @@ public class tracker extends javax.swing.JFrame {
 
         jLabel19.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel19.setText("D / BSE / 23 / 0002");
+        jLabel19.setText("D / BSE / 23 / 0003");
 
         jLabel20.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(0, 0, 0));
@@ -187,7 +187,7 @@ public class tracker extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel18))
             .addGroup(jPanel13Layout.createSequentialGroup()
-                .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel19))
             .addGroup(jPanel13Layout.createSequentialGroup()

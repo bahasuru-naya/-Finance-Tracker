@@ -121,8 +121,8 @@
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="jLabel18" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" attributes="0">
-                              <Component id="jLabel16" min="-2" pref="124" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jLabel16" min="-2" pref="174" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="jLabel19" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -213,7 +213,7 @@
                         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="0" green="0" red="0" type="rgb"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="S Dharmasiri"/>
+                        <Property name="text" type="java.lang.String" value="H D S J Dharmasiri"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel15">
@@ -246,7 +246,7 @@
                         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="0" green="0" red="0" type="rgb"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="D / BSE / 23 / 0002"/>
+                        <Property name="text" type="java.lang.String" value="D / BSE / 23 / 0003"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel20">
