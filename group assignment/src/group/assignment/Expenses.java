@@ -566,7 +566,7 @@ public class Expenses extends javax.swing.JFrame {
     }//GEN-LAST:event_newCategoryTextFieldActionPerformed
 
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
-        // TODO add your handling code here:
+       // TODO add your handling code here:
         int selectedRow = expenseTable.getSelectedRow();
         if (selectedRow == -1) {
             JOptionPane.showMessageDialog(this, "Please select a row to edit.");
