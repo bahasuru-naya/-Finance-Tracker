@@ -580,11 +580,12 @@ public class Reports extends javax.swing.JFrame {
             // User cancelled, do nothing
         }
     }
+// Method for creating PDF file with incomes
 
-    // Method for creating PDF file with incomes
     private void createPdfIncomes(String fileName, ResultSet incomes) throws Exception {
         Document document = new Document();
         PdfWriter.getInstance(document, new FileOutputStream(fileName));
+        savePdfFile(fileName, document);  // Save the PDF file
         document.open();
 
         document.add(new Paragraph("Incomes Report"));
@@ -607,13 +608,14 @@ public class Reports extends javax.swing.JFrame {
 
         document.add(table);
         document.close();
-        savePdfFile(fileName, document);  // Save the PDF file
+
     }
 
     // Method for creating PDF file with expenses
     private void createPdfExpenses(String fileName, ResultSet expenses) throws Exception {
         Document document = new Document();
         PdfWriter.getInstance(document, new FileOutputStream(fileName));
+        savePdfFile(fileName, document);  // Save the PDF file
         document.open();
 
         document.add(new Paragraph("Expenses Report"));
@@ -636,13 +638,14 @@ public class Reports extends javax.swing.JFrame {
 
         document.add(table);
         document.close();
-        savePdfFile(fileName, document);  // Save the PDF file
+
     }
 
 // Method for creating PDF file with both incomes and expenses
     private void createPdfBoth(String fileName, ResultSet incomes, ResultSet expenses) throws Exception {
         Document document = new Document();
         PdfWriter.getInstance(document, new FileOutputStream(fileName));
+        savePdfFile(fileName, document);  // Save the PDF file
         document.open();
 
         document.add(new Paragraph("Incomes and Expenses Report"));
@@ -685,7 +688,7 @@ public class Reports extends javax.swing.JFrame {
 
         document.add(table);
         document.close();
-        savePdfFile(fileName, document);  // Save the PDF file
+
     }
 
     private void savePdfFile(String fileName, Document document) throws Exception {
@@ -698,9 +701,9 @@ public class Reports extends javax.swing.JFrame {
         if (returnValue == JFileChooser.APPROVE_OPTION) {
             File selectedDir = fileChooser.getSelectedFile();
             String filePath = selectedDir.getAbsolutePath() + File.separator + fileName;
-
+            FileOutputStream fileOut = new FileOutputStream(filePath);
             // Create PdfWriter instance before closing the document
-            PdfWriter.getInstance(document, new FileOutputStream(filePath));
+            PdfWriter.getInstance(document, fileOut);
             // Document should be opened before closing it
 
             JOptionPane.showMessageDialog(this, "PDF Report saved successfully at: " + filePath);
